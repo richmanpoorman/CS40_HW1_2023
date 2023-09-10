@@ -18,6 +18,7 @@ typedef struct LinePackage {
 	size_t capacity; // The amount of bytes that can be stored
 } *LinePackage;
 
+// TODO: Explain what each function does
 LinePackage LinePackage_new(char *bytes, size_t length) {
         LinePackage linepackage_p = ALLOC(sizeof(LinePackage));
 
@@ -29,3 +30,5 @@ LinePackage LinePackage_new(char *bytes, size_t length) {
 }
 
 // TODO: make getters and setters
+
+// TODO: write free function
