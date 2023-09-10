@@ -9,8 +9,10 @@
  *      
  */
 
- #ifndef LINEPACKAGE_H_
- #define LINEPACKAGE_H_
+// #include <stdlib.h>
+
+#ifndef LINEPACKAGE_H_
+#define LINEPACKAGE_H_
 
 typedef struct LinePackage *LinePackage;
 
