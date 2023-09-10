@@ -46,6 +46,8 @@ size_t readaline(FILE *inputfd, char **datapp) {
                 i++;
                 
         }
+
+        // TODO: write a comment explaining what this if statement does
         if (currentByte == endLineCharacter) {
                 buffer[i] = (char)currentByte;
         }
