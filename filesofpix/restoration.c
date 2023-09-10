@@ -45,8 +45,15 @@ int main(int argc, char *argv[]) {
         
         // (void) inputFile;
         
+        char **datapp = NULL;
         
-        size_t readalineSize = readaline(inputFile, NULL);
+        size_t readalineSize = readaline(inputFile, datapp);
+
+        printf("Made it to here\n");
+        // TODO:: Check through the sequence; remove in real 
+        for (size_t j = 0; j < readalineSize; j++) {
+                printf("%i ", *datapp[j]);
+        }
 
         if (inputFile != NULL) { // This closes the file when we reach the end
                 printf("Closed the file\n");
@@ -56,6 +63,7 @@ int main(int argc, char *argv[]) {
                 printf("No File\n");
         }
         
+        (void) datapp;
         (void) readalineSize;
         (void) defaultOutputFileName;
         (void) outputFile;

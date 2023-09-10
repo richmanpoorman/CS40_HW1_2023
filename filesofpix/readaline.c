@@ -58,7 +58,7 @@ size_t readaline(FILE *inputfd, char **datapp) {
         // }
 
         // printf("\n");
-        datapp = &buffer;
+        *datapp = buffer;
         
         return i;
 }
