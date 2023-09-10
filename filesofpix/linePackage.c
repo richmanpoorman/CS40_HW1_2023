@@ -12,14 +12,11 @@
  #include <stdlib.h>
  #include <mem.h>
 
-struct LinePackage {
+typedef struct LinePackage {
         char *byteList;  // The pointer to the first byte
 	size_t size;     // The amount of bytes in use
 	size_t capacity; // The amount of bytes that can be stored
-};
-
-typedef struct LinePackage *LinePackage;        // TODO: Check if this should 
-                                                //       be moved up top.
+} *LinePackage;
 
 LinePackage LinePackage_new(char *bytes, size_t length) {
         LinePackage linepackage_p = ALLOC(sizeof(LinePackage));
@@ -30,3 +27,5 @@ LinePackage LinePackage_new(char *bytes, size_t length) {
 
         return linepackage_p;
 }
+
+// TODO: make getters and setters
