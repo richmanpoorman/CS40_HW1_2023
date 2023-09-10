@@ -19,8 +19,7 @@
 
 
 size_t readaline(FILE *inputfd, char **datapp) {
-    // (void) inputfd;
-        (void) datapp;
+        
 
         char *buffer = ALLOC(1000);
         int currentByte = fgetc(inputfd); // Get the first character
