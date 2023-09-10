@@ -62,3 +62,5 @@ size_t readaline(FILE *inputfd, char **datapp) {
         
         return i;
 }
+
+// TODO: fix the error throwers
