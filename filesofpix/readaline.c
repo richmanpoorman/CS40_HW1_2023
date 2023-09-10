@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <seq.h>
+// #include <seq.h>
 #include "mem.h"
 
 #include "readaline.h"
@@ -19,7 +19,7 @@
 
 
 size_t readaline(FILE *inputfd, char **datapp) {
-    // (void) inputfd;
+        // (void) inputfd;
         (void) datapp;
 
         char *buffer = ALLOC(1000);
@@ -59,5 +59,5 @@ size_t readaline(FILE *inputfd, char **datapp) {
         // printf("\n");
         datapp = &buffer;
         
-    return i;
+        return i;
 }
