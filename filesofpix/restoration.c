@@ -11,6 +11,7 @@
 #include <stdio.h>
 
 // #include "readaline.h"
+#include "LinePackage.h"
 
 // size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
 
@@ -63,7 +64,10 @@ int main(int argc, char *argv[]) {
         else {
                 printf("No File\n");
         }
+
+        LinePackage test = LinePackage_new("a", 1);
         
+        (void) test;
         // (void) datapp;
         // (void) readalineSize;
         (void) defaultOutputFileName;

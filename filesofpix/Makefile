@@ -19,7 +19,7 @@ EXECUTABLES = restoration
 #  files it really uses.
 #
 # Add your own .h files to the right side of the assingment below.
-INCLUDES = linePackage.h reader.h
+INCLUDES = LinePackage.h reader.h
 
 # Do all C compies with gcc (at home you could try clang)
 CC = gcc
