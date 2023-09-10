@@ -38,7 +38,7 @@ size_t readaline(FILE *inputfd, char **datapp) {
                         break;
                 }
                 // Seq_addhi(buffer, &currentByte);
-                printf("%i\n", currentByte);
+                // printf("%i\n", currentByte);
                 buffer[i] = (char)currentByte;
 
                 currentByte = fgetc(inputfd); // Go to the next character
