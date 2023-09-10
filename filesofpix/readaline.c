@@ -10,7 +10,9 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <seq.h>
+#include "mem.h"
 
 #include "readaline.h"
 
@@ -20,33 +22,42 @@ size_t readaline(FILE *inputfd, char **datapp) {
     // (void) inputfd;
         (void) datapp;
 
-        Seq_T buffer = Seq_new(1000);
+        char *buffer = ALLOC(1000);
         int currentByte = fgetc(inputfd); // Get the first character
         
         int endLineCharacter = '\n'; // POSSIBLE TODO:: Change \n to 10 (ASCII Code for new line)
 
         // While we haven't reached the end of file and the character is not at the end of line
+        int i = 0;
         while (feof(inputfd) == 0 && currentByte != endLineCharacter) {
-
+                if (i >= 1000) {
+                        fprintf(stderr, "readaline: input line too long\n");
+                        exit(4);
+                }
                 // If there is some error, break the loop
                 if (ferror(inputfd) != 0) {
                         break;
                 }
-                Seq_addhi(buffer, &currentByte);
+                // Seq_addhi(buffer, &currentByte);
+                printf("%i\n", currentByte);
+                buffer[i] = (char)currentByte;
+
                 currentByte = fgetc(inputfd); // Go to the next character
+                i++;
+                
         }
         if (currentByte == endLineCharacter) {
-                Seq_addhi(buffer, &currentByte);
+                buffer[i] = (char)currentByte;
         }
 
-        printf("Made it to here\n");
-        // TODO:: Check through the sequence; remove in real 
-        while (Seq_length(buffer) > 0) {
-                char *byte = Seq_remlo(buffer);
-                printf("%i ", *byte);
-        }
+        // printf("Made it to here\n");
+        // // TODO:: Check through the sequence; remove in real 
+        // for (int j = 0; j < i; j++) {
+        //         printf("%i ", buffer[j]);
+        // }
 
-        printf("\n");
+        // printf("\n");
+        datapp = &buffer;
         
-    return 0;
+    return i;
 }
