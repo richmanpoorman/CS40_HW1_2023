@@ -8,3 +8,10 @@
  *      TODO: write summary for reader.c
  *      
  */
+
+// TODO: write function descriptions
+
+Seq reader(FILE *inputFile)
+{
+        
+}

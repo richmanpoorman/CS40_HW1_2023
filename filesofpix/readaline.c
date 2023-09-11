@@ -11,17 +11,29 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-// #include <seq.h>
 #include "mem.h"
 
 #include "readaline.h"
 
 
 
-size_t readaline(FILE *inputfd, char **datapp) {
-        // (void) inputfd;
+size_t readaline(FILE *inputfd, char **datapp) 
+{
+        if (inputfd == NULL || datapp == NULL) {
+                exit(1);        // TODO: Check if this exits with a checked runtime error
+        }
+
+        if (feof(inputfd) != 0) {
+                *datapp = NULL;
+                return 0;
+        } 
 
         char *buffer = ALLOC(1000);
+        
+        if (buffer == NULL) {
+                exit(1);        // TODO: Check if this exits with a checked runtime error
+        }
+
         int currentByte = fgetc(inputfd); // Get the first character
         
         int endLineCharacter = '\n'; // POSSIBLE TODO:: Change \n to 10 (ASCII Code for new line)

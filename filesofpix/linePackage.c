@@ -57,5 +57,3 @@ void LinePackage_set_size(LinePackage byteListStruct, size_t new_size)
 
         byteListStruct -> size = new_size;
 }
-
-// TODO: write free function

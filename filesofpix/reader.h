@@ -9,4 +9,9 @@
  *      
  */
 
- 
+#ifndef READER_H_
+#define READER_H_
+
+Seq reader(FILE *inputFile);
+
+#endif
