@@ -9,7 +9,7 @@
  *      
  */
 
-// #include <stdlib.h>
+#include <stdlib.h>
 
 #ifndef LINEPACKAGE_H_
 #define LINEPACKAGE_H_
