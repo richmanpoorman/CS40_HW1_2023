@@ -33,7 +33,7 @@ LinePackage LinePackage_new(char *bytes, size_t length)
 
 void LinePackage_free(LinePackage byteListStruct) 
 {
-        FREE(byteListStruct -> byteList);
+        // FREE(byteListStruct -> byteList);    // TODO: Check why this fixes double free error
         FREE(byteListStruct);
 }
 

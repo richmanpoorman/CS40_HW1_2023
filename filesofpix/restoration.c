@@ -65,9 +65,30 @@ int main(int argc, char *argv[]) {
                 printf("No File\n");
         }
 
-        LinePackage test = LinePackage_new("a", 1);
+        // // tests
+        // printf("running tests!\n");
+        // char *ptr = "abc";
+        // LinePackage test = LinePackage_new(ptr, 3);
+        // size_t testLength = LinePackage_size(test);
+        // printf("testLength is %li\n", testLength);
+        // char *testByteList = LinePackage_byteList(test);
+        // for (size_t i = 0; i < testLength; i++) {
+        //         printf("%c", testByteList[i]);
+        // }
+        // printf("\n");
+
+        // LinePackage_set_size(test, 2);
+        // testLength = LinePackage_size(test);
+        // printf("testLength is %li\n", testLength);
+        // testByteList = LinePackage_byteList(test);
+        // for (size_t i = 0; i < testLength; i++) {
+        //         printf("%c", testByteList[i]);
+        // }
+        // printf("\n");
+
+        // LinePackage_free(test);
         
-        (void) test;
+        // (void) test;
         // (void) datapp;
         // (void) readalineSize;
         (void) defaultOutputFileName;

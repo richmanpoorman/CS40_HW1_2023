@@ -13,5 +13,9 @@
 
 Seq reader(FILE *inputFile)
 {
-        
+        if (inputFile == NULL) {
+                exit(1);        // TODO: Check if this exits with a checked runtime error
+        }
+
+        char **datapp;
 }
