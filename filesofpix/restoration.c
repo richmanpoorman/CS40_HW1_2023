@@ -11,7 +11,8 @@
 #include <stdio.h>
 
 // #include "readaline.h"
-// #include "LinePackage.h"     // TODO: check if we need these .h files
+#include "LinePackage.h"     
+#include "reader.h"             // TODO: check if we need these .h files
 #include <seq.h>
 
 // size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
@@ -58,6 +59,17 @@ int main(int argc, char *argv[]) {
         //         printf("%i ", datapp[j]);
         // }
 
+        // test that reader works
+        Seq_T testReader = reader(inputFile);
+        printf("testing reader\n");
+        while (Seq_length(testReader) > 0) {
+                LinePackage testPackage = Seq_remlo(testReader);
+                for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
+                        printf("%i ", LinePackage_byteList(testPackage)[i]);
+                }
+                printf("\n");
+        }
+
         if (inputFile != NULL) { // This closes the file when we reach the end
                 printf("Closed the file\n");
                 fclose(inputFile);
@@ -88,9 +100,6 @@ int main(int argc, char *argv[]) {
         // printf("\n");
 
         // LinePackage_free(test);
-
-        // test that reader works
-        
         
         // (void) test;
         // (void) datapp;
