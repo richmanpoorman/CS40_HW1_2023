@@ -18,6 +18,12 @@ typedef struct LinePackage *LinePackage;
 
 LinePackage LinePackage_new(char *bytes, size_t length);
 
-void LinePackage_free(LinePackage *byteListStruct);
+void LinePackage_free(LinePackage byteListStruct);
 
- #endif
+char *LinePackage_byteList(LinePackage byteListStruct);
+
+size_t LinePackage_size(LinePackage byteListStruct);
+
+void LinePackage_set_size(LinePackage byteListStruct, size_t new_size);
+
+#endif
