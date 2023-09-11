@@ -79,8 +79,8 @@ clean:
 #    Those .o files are linked together to build the corresponding
 #    executable.
 #
-restoration: restoration.o readaline.o LinePackage.o
-	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o LinePackage.o $(LDLIBS)
+restoration: restoration.o readaline.o LinePackage.o reader.o
+	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o LinePackage.o reader.o $(LDLIBS)
 
 #
 # Other Shortcuts worth nothing

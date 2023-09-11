@@ -11,11 +11,35 @@
 
 // TODO: write function descriptions
 
-Seq reader(FILE *inputFile)
+#include <seq.h>
+#include <stdio.h>     // TODO: Check if include reader.h file
+#include <stdlib.h>
+#include <mem.h>
+#include "LinePackage.h"
+#include "readaline.h"
+
+Seq_T reader(FILE *inputFile)
 {
         if (inputFile == NULL) {
                 exit(1);        // TODO: Check if this exits with a checked runtime error
         }
 
-        char **datapp;
+        char **datapp = ALLOC(sizeof(char*));
+
+        size_t size = readaline(inputFile, datapp);
+
+        Seq_T lines = Seq_new(1);
+
+        // TODO: Check if we can use do while loops
+        while (size != 0) {
+                LinePackage tempLine = LinePackage_new(*datapp, size);
+
+                Seq_addhi(lines, tempLine);
+                size = readaline(inputFile, datapp);
+        }
+
+        // Deallocate datapp memory;
+        FREE(datapp);
+
+        return lines;
 }

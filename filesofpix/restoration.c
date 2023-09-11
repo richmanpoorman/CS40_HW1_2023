@@ -11,7 +11,8 @@
 #include <stdio.h>
 
 // #include "readaline.h"
-#include "LinePackage.h"
+// #include "LinePackage.h"     // TODO: check if we need these .h files
+#include <seq.h>
 
 // size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
 
@@ -87,6 +88,9 @@ int main(int argc, char *argv[]) {
         // printf("\n");
 
         // LinePackage_free(test);
+
+        // test that reader works
+        
         
         // (void) test;
         // (void) datapp;

@@ -9,9 +9,12 @@
  *      
  */
 
+#include <seq.h>
+#include <stdio.h>
+
 #ifndef READER_H_
 #define READER_H_
 
-Seq reader(FILE *inputFile);
+Seq_T reader(FILE *inputFile);
 
 #endif
