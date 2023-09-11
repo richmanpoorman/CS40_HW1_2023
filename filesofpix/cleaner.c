@@ -34,26 +34,26 @@ LinePackage clean_single_line(LinePackage line)
         for (size_t readHead = 0; readHead < size; readHead++) {
                 char byte = byteList[readHead];
 
-                if (hasNum) {
-                        if (byte > 47 && byte < 58) {
+                if (hasNum) {   // checks if seen a digit in this line
+                        if (byte > 47 && byte < 58) {   // checks if digit
                                 byteList[writeHead] = byte;
                                 writeHead++;
                                 placedSpace = false;
-                        } else if (byte == 10) {
+                        } else if (byte == 10) {        // check if \n
                                 // gets rid of space before \n
-                                if (placedSpace) {
+                                if (placedSpace) {      // check if space was placed after digit
                                         byteList[writeHead - 1] = byte;
                                 } else {        // adds \n after digit if no space
                                         byteList[writeHead] = byte;
                                         writeHead++;
                                 }
-                        } else if (!placedSpace) {
+                        } else if (!placedSpace) {      // place space after digit
                                 byteList[writeHead] = ' ';
                                 writeHead++;
+                                placedSpace = true;
                         }
                 } else {
-                        // check if digit
-                        if (byte > 47 && byte < 58) {
+                        if (byte > 47 && byte < 58) {   // places first digit at beginning of line
                                 hasNum = true;
                                 byteList[writeHead] = byte;
                                 writeHead++;
