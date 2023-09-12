@@ -22,7 +22,7 @@ void test(FILE *inputFile)
         //         printf("%i ", datapp[j]);
         // }
 
-        // TODO: This test is giving weird leaks—bad test???
+        // // TODO: This test is giving weird leaks—bad test???
         // // test that reader works
         // Seq_T testReader = reader(inputFile);
         // printf("testing reader\n");
@@ -68,13 +68,14 @@ void test(FILE *inputFile)
 
         // LinePackage_free(test);
 
-        // test cleaner
+        // TODO: this test is likely a bad test with bad code
+        // // test cleaner
         Seq_T testReader = reader(inputFile);
         Seq_T testCleaner = cleaner(testReader);
         while (Seq_length(testCleaner) > 0) {
                 LinePackage testPackage = Seq_remlo(testCleaner);
                 for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
-                        printf("%i ", LinePackage_byteList(testPackage)[i]);
+                        printf("%c ", LinePackage_byteList(testPackage)[i]);
                 }
                 printf("\n");
                 LinePackage_free(testPackage);
