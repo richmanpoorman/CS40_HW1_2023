@@ -25,6 +25,7 @@ Seq_T reader(FILE *inputFile)
         }
 
         char **datapp = ALLOC(sizeof(char*));
+        printf("ALLOC'd datapp at %p\n", (void*) datapp);
 
         size_t size = readaline(inputFile, datapp);
 
@@ -39,6 +40,7 @@ Seq_T reader(FILE *inputFile)
         }
 
         // Deallocate datapp memory;
+        printf("FREE'd datapp at %p\n", (void*) datapp);
         FREE(datapp);
 
         return lines;

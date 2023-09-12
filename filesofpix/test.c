@@ -21,6 +21,7 @@ void test(FILE *inputFile)
         //         printf("%i ", datapp[j]);
         // }
 
+        // TODO: This test is giving weird leaks—bad test???
         // // test that reader works
         // Seq_T testReader = reader(inputFile);
         // printf("testing reader\n");
@@ -32,6 +33,8 @@ void test(FILE *inputFile)
         //         printf("\n");
         //         LinePackage_free(testPackage);
         // }
+
+        // (void) testReader;
 
         // tests
         printf("running tests!\n");
@@ -76,7 +79,7 @@ int main(int argc, char *argv[])
         printf("Hello World!\n"); // RESULT: WORKED
         
         FILE *inputFile  = NULL;
-        FILE *outputFile = NULL;
+        FILE *outputFile = NULL;        // TODO: Check if we free these pointers
         
         char *defaultOutputFileName = "uncorrputed.pgm";
         // TODO :: Put in the error codes for no input file

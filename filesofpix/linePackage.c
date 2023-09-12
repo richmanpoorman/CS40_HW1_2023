@@ -9,8 +9,9 @@
  *      
  */
 
- #include <stdlib.h>
- #include <mem.h>
+#include <stdlib.h>
+#include <mem.h>
+#include <stdio.h>      // TODO: Remove
 
 typedef struct LinePackage 
 {
@@ -23,6 +24,8 @@ typedef struct LinePackage
 LinePackage LinePackage_new(char *bytes, size_t length) 
 {
         LinePackage linepackage_p = ALLOC(sizeof(*linepackage_p));
+        printf("ALLOC'd new LinePackage at %p\n", (void*) linepackage_p);
+
 
         linepackage_p -> byteList = bytes;
         linepackage_p -> size = length;
@@ -34,9 +37,13 @@ LinePackage LinePackage_new(char *bytes, size_t length)
 void LinePackage_free(LinePackage byteListStruct) 
 {
         // TODO: Put memory all on heap and make sure to free
+        printf("FREE'd byteListStruct -> byteList at %p\n", (void*) byteListStruct -> byteList);
         FREE(byteListStruct -> byteList);    // TODO: Check why this fixes double free error
+        printf("FREE'd byteListStruct at %p\n", (void*) byteListStruct);
         FREE(byteListStruct);
         // TODO: Check that this doesn't memory leak
+
+        // printf("free\n");
 }
 
 // TODO: fix function formatting
