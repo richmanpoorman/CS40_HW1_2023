@@ -16,6 +16,10 @@
 // TODO: Write function descriptions
 Seq_T cleaner(Seq_T *corruptedLines)
 {
+        // clean every line sequentially
+
+        //
+
         return *corruptedLines;
 }
 

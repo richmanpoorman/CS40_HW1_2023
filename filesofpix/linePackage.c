@@ -22,7 +22,7 @@ typedef struct LinePackage
 // TODO: Explain what each function does
 LinePackage LinePackage_new(char *bytes, size_t length) 
 {
-        LinePackage linepackage_p = ALLOC(sizeof(LinePackage));
+        LinePackage linepackage_p = ALLOC(sizeof(*linepackage_p));
 
         linepackage_p -> byteList = bytes;
         linepackage_p -> size = length;
@@ -33,8 +33,10 @@ LinePackage LinePackage_new(char *bytes, size_t length)
 
 void LinePackage_free(LinePackage byteListStruct) 
 {
-        // FREE(byteListStruct -> byteList);    // TODO: Check why this fixes double free error
+        // TODO: Put memory all on heap and make sure to free
+        FREE(byteListStruct -> byteList);    // TODO: Check why this fixes double free error
         FREE(byteListStruct);
+        // TODO: Check that this doesn't memory leak
 }
 
 // TODO: fix function formatting
