@@ -15,7 +15,7 @@
 #ifndef CLEANER_H_
 #define CLEANER_H_
 
-Seq_T cleaner(Seq_T *corruptedLines);
+Seq_T cleaner(Seq_T corruptedLines);
 
 LinePackage clean_single_line(LinePackage line);
 

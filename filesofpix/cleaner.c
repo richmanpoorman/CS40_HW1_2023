@@ -13,14 +13,25 @@
 #include "LinePackage.h"
 #include <stdbool.h>
 
+LinePackage clean_single_line(LinePackage line);
+
 // TODO: Write function descriptions
-Seq_T cleaner(Seq_T *corruptedLines)
+Seq_T cleaner(Seq_T corruptedLines)
 {
+        // make new Seq_T to store cleaned lines
+        Seq_T cleanedLines = Seq_new(1);
+
         // clean every line sequentially
+        while (Seq_length(corruptedLines) > 0) {
+                LinePackage line = Seq_remlo(corruptedLines);
+                line = clean_single_line(line);
 
-        //
+                if (line != NULL) {
+                        Seq_addhi(cleanedLines, line);
+                }
+        }
 
-        return *corruptedLines;
+        return cleanedLines;
 }
 
 // TODO: Test clean_single_line and test cleaner
