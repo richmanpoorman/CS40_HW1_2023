@@ -70,16 +70,16 @@ void test(FILE *inputFile)
 
         // TODO: this test is likely a bad test with bad code
         // // test cleaner
-        Seq_T testReader = reader(inputFile);
-        Seq_T testCleaner = cleaner(testReader);
-        while (Seq_length(testCleaner) > 0) {
-                LinePackage testPackage = Seq_remlo(testCleaner);
-                for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
-                        printf("%c ", LinePackage_byteList(testPackage)[i]);
-                }
-                printf("\n");
-                LinePackage_free(testPackage);
-        }
+        // Seq_T testReader = reader(inputFile);
+        // Seq_T testCleaner = cleaner(testReader);
+        // while (Seq_length(testCleaner) > 0) {
+        //         LinePackage testPackage = Seq_remlo(testCleaner);
+        //         for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
+        //                 printf("%c ", LinePackage_byteList(testPackage)[i]);
+        //         }
+        //         printf("\n");
+        //         LinePackage_free(testPackage);
+        // }
 
         (void) inputFile;
 }

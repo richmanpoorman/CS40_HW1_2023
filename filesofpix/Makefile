@@ -19,7 +19,7 @@ EXECUTABLES = restoration
 #  files it really uses.
 #
 # Add your own .h files to the right side of the assingment below.
-INCLUDES = LinePackage.h reader.h cleaner.h
+INCLUDES = LinePackage.h reader.h cleaner.h stringToBytes.h
 
 # Do all C compies with gcc (at home you could try clang)
 CC = gcc
@@ -81,8 +81,8 @@ clean:
 #    Those .o files are linked together to build the corresponding
 #    executable.
 #
-restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o
-	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o LinePackage.o reader.o cleaner.o $(LDLIBS)
+restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o
+	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o $(LDLIBS)
 
 #
 # Other Shortcuts worth nothing
