@@ -36,24 +36,24 @@ Seq_T reader(FILE *inputFile)
                 exit(1);        // TODO: Check if this exits with a checked runtime error
         }
 
-        char **datapp = ALLOC(sizeof(char*));
-        printf("ALLOC'd datapp at %p\n", (void*) datapp);
+        char *datapp;
+        // printf("ALLOC'd datapp at %p\n", (void*) datapp);
         /* TODO: delete the printf statements */
 
-        size_t size = readaline(inputFile, datapp);
+        size_t size = readaline(inputFile, &datapp);
 
         Seq_T lines = Seq_new(1);
 
         // TODO: Check if we can use do while loops
         while (size != 0) {
-                LinePackage tempLine = LinePackage_new(*datapp, size);
+                LinePackage tempLine = LinePackage_new(datapp, size);
 
                 Seq_addhi(lines, tempLine);
-                size = readaline(inputFile, datapp);
+                size = readaline(inputFile, &datapp);
         }
 
         // Deallocate datapp memory;
-        printf("FREE'd datapp at %p\n", (void*) datapp);
+        // printf("FREE'd datapp at %p\n", (void*) datapp);
         FREE(datapp);
 
         return lines;

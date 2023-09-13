@@ -8,79 +8,62 @@
 #include <seq.h>
 #include <mem.h>
 #include "cleaner.h"
+#include "readaline.h"
 
 // size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
 
 // TODO: fix function formatting
 
+void freeTestSequence(Seq_T testSequence) {
+        while (Seq_length(testSequence) > 0) {
+                LinePackage package = Seq_remlo(testSequence);
+                size_t size = LinePackage_size(package);
+                char *bytes = LinePackage_byteList(package);
+                for (size_t i = 0; i < size; i++) {
+                        printf("%i ", bytes[i]);
+                }
+                printf("\n");
+                LinePackage_free(package);
+        }
+        Seq_free(&testSequence);
+}
+
+void testLinePackageNew() {
+        char *testString = ALLOC(3);
+        testString[0] = 'a';
+        testString[1] = 'b';
+        testString[2] = 'c';
+        Seq_T test = Seq_new(1);
+        LinePackage package = LinePackage_new(testString, 3);
+        
+        Seq_addhi(test, package);
+        
+        freeTestSequence(test);
+        
+}
+
+void testReadaline(FILE *inputFile) {
+        char *datapp;
+
+        size_t size = readaline(inputFile, &datapp);
+        printf("size %li \n", size);
+        for (size_t i = 0; i < size; i++) {
+                printf("%c", datapp[i]);
+        }
+        printf("\n");
+        FREE(datapp);
+}
+
+void testReader(FILE *inputFile) {
+        Seq_T data = reader(inputFile);
+        freeTestSequence(data);
+}
+
 void test(FILE *inputFile) 
 {
-        // testing
-        // printf("Made it to here\n");
-        // // TODO:: Check through the sequence; remove in real 
-        // for (size_t j = 0; j < readalineSize; j++) {
-        //         printf("%i ", datapp[j]);
-        // }
-
-        // // TODO: This test is giving weird leaks—bad test???
-        // // test that reader works
-        // Seq_T testReader = reader(inputFile);
-        // printf("testing reader\n");
-        // while (Seq_length(testReader) > 0) {
-        //         LinePackage testPackage = Seq_remlo(testReader);
-        //         for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
-        //                 printf("%i ", LinePackage_byteList(testPackage)[i]);
-        //         }
-        //         printf("\n");
-        //         LinePackage_free(testPackage);
-        // }
-
-        // (void) testReader;
-
-        // // tests
-        // printf("running tests!\n");
-        // char *str = ALLOC(3);
-        // str[0] = 'a';
-        // str[1] = 'b';
-        // str[2] = 'c';
-        // // char *ptr = "abc";
-        // LinePackage test = LinePackage_new(str, 3);
-        // size_t testLength = LinePackage_size(test);
-        // printf("testLength is %li\n", testLength);
-        // char *testByteList = LinePackage_byteList(test);
-        // for (size_t i = 0; i < testLength; i++) {
-        //         printf("%c", testByteList[i]);
-        // }
-        // printf("\n");
-
-        // printf("%c\n", str[1]);
-
-        // str[1] = 'x';
-
-        // LinePackage_set_size(test, 2);
-        // testLength = LinePackage_size(test);
-        // printf("testLength is %li\n", testLength);
-        // testByteList = LinePackage_byteList(test);
-        // for (size_t i = 0; i < testLength; i++) {
-        //         printf("%c", testByteList[i]);
-        // }
-        // printf("\n");
-
-        // LinePackage_free(test);
-
-        // TODO: this test is likely a bad test with bad code
-        // // test cleaner
-        // Seq_T testReader = reader(inputFile);
-        // Seq_T testCleaner = cleaner(testReader);
-        // while (Seq_length(testCleaner) > 0) {
-        //         LinePackage testPackage = Seq_remlo(testCleaner);
-        //         for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
-        //                 printf("%c ", LinePackage_byteList(testPackage)[i]);
-        //         }
-        //         printf("\n");
-        //         LinePackage_free(testPackage);
-        // }
-
+        testReader(inputFile);
+        // testLinePackageNew();
+        // testReadaline(inputFile);
         (void) inputFile;
 }
 
@@ -90,7 +73,7 @@ int main(int argc, char *argv[])
         // (void) argc; 
         // (void) argv;
         
-        printf("Hello World!\n"); // RESULT: WORKED
+        // printf("Hello World!\n"); // RESULT: WORKED
         
         FILE *inputFile  = NULL;
         FILE *outputFile = NULL;        // TODO: Check if we free these pointers
