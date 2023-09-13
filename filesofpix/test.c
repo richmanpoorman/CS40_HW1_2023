@@ -8,6 +8,7 @@
 #include <seq.h>
 #include <mem.h>
 #include "cleaner.h"
+#include "stringToBytes.h"
 
 // size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
 
@@ -80,6 +81,20 @@ void test(FILE *inputFile)
         //         printf("\n");
         //         LinePackage_free(testPackage);
         // }
+
+        // test stringToBytes
+        Seq_T testSeq = Seq_new(1);
+        testSeq = reader(inputFile);
+        testSeq = cleaner(testSeq);
+        testSeq = stringToBytes(testSeq);
+        while (Seq_length(testSeq) > 0) {
+                LinePackage testPackage = Seq_remlo(testSeq);
+                for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
+                        printf("%c ", LinePackage_byteList(testPackage)[i]);
+                }
+                printf("\n");
+                // LinePackage_free(testPackage);
+        }
 
         (void) inputFile;
 }
