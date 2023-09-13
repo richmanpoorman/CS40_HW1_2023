@@ -40,8 +40,9 @@ Seq_T reader(FILE *inputFile)
         }
 
         // Deallocate datapp memory;
-        printf("FREE'd datapp at %p\n", (void*) datapp);
-        FREE(datapp);
+        // printf("FREE'd datapp at %p\n", (void*) datapp);
+        // FREE(datapp);   // TODO: Check why this stops leak
+        // FREE(lines);
 
         return lines;
 }

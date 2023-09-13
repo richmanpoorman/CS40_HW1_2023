@@ -8,6 +8,7 @@
 #include <seq.h>
 #include <mem.h>
 #include "cleaner.h"
+#include "readaline.h"
 
 // size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
 
@@ -69,17 +70,36 @@ void test(FILE *inputFile)
         // LinePackage_free(test);
 
         // TODO: this test is likely a bad test with bad code
-        // // test cleaner
-        // Seq_T testReader = reader(inputFile);
-        // Seq_T testCleaner = cleaner(testReader);
-        // while (Seq_length(testCleaner) > 0) {
-        //         LinePackage testPackage = Seq_remlo(testCleaner);
-        //         for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
-        //                 printf("%c ", LinePackage_byteList(testPackage)[i]);
-        //         }
-        //         printf("\n");
-        //         LinePackage_free(testPackage);
-        // }
+        // test cleaner
+        Seq_T testReader = reader(inputFile);
+        while (Seq_length(testReader) > 0) {
+                LinePackage testPackage = Seq_remlo(testReader);
+                for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
+                        printf("%c", LinePackage_byteList(testPackage)[i]);
+                }
+                printf("\n");
+                printf("FREE'd LinePackage at %p\n", (void*) testPackage);
+                // FREE(testPackage);
+        }
+        printf("calling cleaner\n");
+        Seq_T testCleaner = cleaner(testReader);
+        while (Seq_length(testCleaner) > 0) {
+                LinePackage testPackage = Seq_remlo(testCleaner);
+                for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
+                        printf("%c", LinePackage_byteList(testPackage)[i]);
+                }
+                printf("\n");
+                LinePackage_free(testPackage);
+        }
+        Seq_free(&testReader);
+        FREE(testReader);
+        (void) testReader;
+        (void) testCleaner;
+
+        // // test readaline
+        // char **testStr = ALLOC(1000);
+        // readaline(inputFile, testStr);
+        // FREE(testStr);
 
         (void) inputFile;
 }

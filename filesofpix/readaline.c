@@ -72,6 +72,8 @@ size_t readaline(FILE *inputfd, char **datapp)
 
         // printf("\n");
         *datapp = buffer;
+        // printf("FREE'd *buffer at %p\n", (void*) buffer);
+        // FREE(buffer);   // TODO: Check why this stops leak
         
         return i;
 }
