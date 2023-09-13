@@ -18,6 +18,18 @@
 #include "LinePackage.h"
 #include "readaline.h"
 
+/* TODO: Check if reader needs a function contract to fulfil style guide */
+/**********reader********
+ *
+ * Reads the contents of a given file
+ * Inputs:
+ *              FILE *inputFile: pointer to file to read from
+ * Return: Hanson Sequence of LinePackage structs that represents a line
+ * Expects
+ *      inputFile to be opened
+ * Notes:
+ *      TODO: Finish summary
+ ************************/
 Seq_T reader(FILE *inputFile)
 {
         if (inputFile == NULL) {
@@ -26,6 +38,7 @@ Seq_T reader(FILE *inputFile)
 
         char **datapp = ALLOC(sizeof(char*));
         printf("ALLOC'd datapp at %p\n", (void*) datapp);
+        /* TODO: delete the printf statements */
 
         size_t size = readaline(inputFile, datapp);
 
