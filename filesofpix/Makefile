@@ -91,5 +91,5 @@ restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o stringTo
 #
 
 # executable that makes the test.c file and runs it TODO: Fix description
-test: test.o readaline.o LinePackage.o reader.o cleaner.o
-	$(CC) $(LDFLAGS) -o test test.o readaline.o LinePackage.o reader.o cleaner.o $(LDLIBS)
+test: test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o
+	$(CC) $(LDFLAGS) -o test test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o $(LDLIBS)
