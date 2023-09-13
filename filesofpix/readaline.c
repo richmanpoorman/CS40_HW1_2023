@@ -29,7 +29,7 @@ size_t readaline(FILE *inputfd, char **datapp)
         } 
 
         char *buffer = ALLOC(1000);
-        printf("ALLOC'd *buffer at %p\n", (void*) buffer);
+        // printf("ALLOC'd *buffer at %p\n", (void*) buffer);
         
         if (buffer == NULL) {
                 exit(1);        // TODO: Check if this exits with a checked runtime error
@@ -73,7 +73,7 @@ size_t readaline(FILE *inputfd, char **datapp)
         // printf("\n");
         *datapp = buffer;
         // printf("FREE'd *buffer at %p\n", (void*) buffer);
-        // FREE(buffer);   // TODO: Check why this stops leak
+        FREE(buffer);   // TODO: Check why this stops leak
         
         return i;
 }

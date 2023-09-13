@@ -78,23 +78,24 @@ void test(FILE *inputFile)
                         printf("%c", LinePackage_byteList(testPackage)[i]);
                 }
                 printf("\n");
-                printf("FREE'd LinePackage at %p\n", (void*) testPackage);
-                // FREE(testPackage);
+                // printf("FREE'd LinePackage at %p\n", (void*) testPackage);
+                FREE(testPackage);
         }
-        printf("calling cleaner\n");
-        Seq_T testCleaner = cleaner(testReader);
-        while (Seq_length(testCleaner) > 0) {
-                LinePackage testPackage = Seq_remlo(testCleaner);
-                for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
-                        printf("%c", LinePackage_byteList(testPackage)[i]);
-                }
-                printf("\n");
-                LinePackage_free(testPackage);
-        }
+        // printf("calling cleaner\n");
+        // Seq_T testCleaner = cleaner(testReader);
+        // while (Seq_length(testCleaner) > 0) {
+        //         LinePackage testPackage = Seq_remlo(testCleaner);
+        //         for (size_t i = 0; i < LinePackage_size(testPackage); i++) {
+        //                 printf("%c", LinePackage_byteList(testPackage)[i]);
+        //         }
+        //         printf("\n");
+        //         LinePackage_free(testPackage);
+        //         // FREE(testPackage);
+        // }
         Seq_free(&testReader);
         FREE(testReader);
         (void) testReader;
-        (void) testCleaner;
+        // (void) testCleaner;
 
         // // test readaline
         // char **testStr = ALLOC(1000);
