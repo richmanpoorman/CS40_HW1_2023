@@ -37,7 +37,6 @@ size_t readaline(FILE *inputfd, char **datapp)
         int currentByte = fgetc(inputfd); // Get the first character
         
         int endLineCharacter = '\n'; // POSSIBLE TODO:: Change \n to 10 (ASCII Code for new line)
-        /* POSSIBLE TODO: Put this endLineCharacter at the top of file as it is a constant */
 
         // While we haven't reached the end of file and the character is not at the end of line
         size_t i = 0;

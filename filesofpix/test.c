@@ -9,7 +9,7 @@
 #include <mem.h>
 #include "cleaner.h"
 #include "readaline.h"
-
+#include "stringToBytes.h"
 // size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
 
 // TODO: fix function formatting
@@ -17,7 +17,12 @@
 
 void printBytes(char *bytes, size_t size) {
         for (size_t i = 0; i < size; i++) {
-                printf("%i(%c) ", bytes[i], bytes[i]);
+                // Replace unseeable characters [that could mess with output if read as char] as a blank space instead
+                char displayableCharacter = ' ';
+                if (bytes[i] >= 32 && bytes[i] != 127) {
+                        displayableCharacter = bytes[i];
+                }
+                printf("%i(%c) ", (unsigned char)bytes[i], displayableCharacter);
         }
         printf("\n");
 }
@@ -75,13 +80,25 @@ void testCleaner(FILE *inputFile) {
 
         freeTestSequence(cleanedData);
 }
+// TEST EDGE CASE: 10 IS A NUMBER IN THE FILE
+void testStringToBytes(FILE *inputFile) {
+        Seq_T dirtyData   = reader(inputFile);
+        Seq_T cleanedData = cleaner(dirtyData);
+        Seq_T rawData     = stringToBytes(cleanedData);
+
+        Seq_free(&dirtyData);
+        Seq_free(&cleanedData);
+
+        freeTestSequence(rawData);
+}
 
 void test(FILE *inputFile) 
 {
+        testStringToBytes(inputFile);
         // testCleaner(inputFile);
         // testReader(inputFile);
         // testLinePackageNew();
-        testReadaline(inputFile);
+        // testReadaline(inputFile);
         (void) inputFile;
 }
 
