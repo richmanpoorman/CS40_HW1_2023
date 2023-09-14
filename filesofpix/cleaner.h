@@ -17,6 +17,6 @@
 
 Seq_T cleaner(Seq_T corruptedLines);
 
-LinePackage clean_single_line(LinePackage line);        // TODO: Fix this to be camel case
+LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);        // TODO: Fix this to be camel case
 
 #endif

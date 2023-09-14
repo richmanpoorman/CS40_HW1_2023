@@ -94,8 +94,8 @@ void testStringToBytes(FILE *inputFile) {
 
 void test(FILE *inputFile) 
 {
-        testStringToBytes(inputFile);
-        // testCleaner(inputFile);
+        // testStringToBytes(inputFile);
+        testCleaner(inputFile);
         // testReader(inputFile);
         // testLinePackageNew();
         // testReadaline(inputFile);
