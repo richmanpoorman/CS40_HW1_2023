@@ -14,15 +14,26 @@
 
 // TODO: fix function formatting
 
+
+void printBytes(char *bytes, size_t size) {
+        for (size_t i = 0; i < size; i++) {
+                printf("%i(%c) ", bytes[i], bytes[i]);
+        }
+        printf("\n");
+}
+
 void freeTestSequence(Seq_T testSequence) {
+        printf("Number of lines: %i\n", Seq_length(testSequence));
         while (Seq_length(testSequence) > 0) {
                 LinePackage package = Seq_remlo(testSequence);
                 size_t size = LinePackage_size(package);
+
+                printf("Line Size: %li\n", size);
+
                 char *bytes = LinePackage_byteList(package);
-                for (size_t i = 0; i < size; i++) {
-                        printf("%i ", bytes[i]);
-                }
-                printf("\n");
+                
+                printBytes(bytes, size);
+                
                 LinePackage_free(package);
         }
         Seq_free(&testSequence);
@@ -41,16 +52,13 @@ void testLinePackageNew() {
         freeTestSequence(test);
         
 }
-
+// TODO:: readaline is not adding the endline character
 void testReadaline(FILE *inputFile) {
         char *datapp;
 
         size_t size = readaline(inputFile, &datapp);
         printf("size %li \n", size);
-        for (size_t i = 0; i < size; i++) {
-                printf("%c", datapp[i]);
-        }
-        printf("\n");
+        printBytes(datapp, size);
         FREE(datapp);
 }
 
@@ -59,11 +67,21 @@ void testReader(FILE *inputFile) {
         freeTestSequence(data);
 }
 
+void testCleaner(FILE *inputFile) {
+        Seq_T dirtyData = reader(inputFile);
+
+        Seq_T cleanedData = cleaner(dirtyData);
+        Seq_free(&dirtyData);
+
+        freeTestSequence(cleanedData);
+}
+
 void test(FILE *inputFile) 
 {
-        testReader(inputFile);
+        // testCleaner(inputFile);
+        // testReader(inputFile);
         // testLinePackageNew();
-        // testReadaline(inputFile);
+        testReadaline(inputFile);
         (void) inputFile;
 }
 

@@ -29,7 +29,6 @@ size_t readaline(FILE *inputfd, char **datapp)
         } 
 
         char *buffer = ALLOC(1000);
-        printf("ALLOC'd *buffer at %p\n", (void*) buffer);
         
         if (buffer == NULL) {
                 exit(1);        // TODO: Check if this exits with a checked runtime error
@@ -41,7 +40,7 @@ size_t readaline(FILE *inputfd, char **datapp)
         /* POSSIBLE TODO: Put this endLineCharacter at the top of file as it is a constant */
 
         // While we haven't reached the end of file and the character is not at the end of line
-        int i = 0;
+        size_t i = 0;
         while (feof(inputfd) == 0 && currentByte != endLineCharacter) {
                 if (i >= 1000) {
                         fprintf(stderr, "readaline: input line too long\n");
@@ -62,16 +61,16 @@ size_t readaline(FILE *inputfd, char **datapp)
 
         // TODO: write a comment explaining what this if statement does
         if (currentByte == endLineCharacter) {
-                buffer[i] = (char)currentByte;
+                if (i >= 1000) {
+                        fprintf(stderr, "readaline: input line too long\n");
+                        exit(4);
+                }
+                
+                buffer[i] = endLineCharacter;
+                i++;
+                
         }
 
-        // printf("Made it to here\n");
-        // // TODO:: Check through the sequence; remove in real 
-        // for (int j = 0; j < i; j++) {
-        //         printf("%i ", buffer[j]);
-        // }
-
-        // printf("\n");
         *datapp = buffer;
         
         return i;
