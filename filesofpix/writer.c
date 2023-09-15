@@ -49,4 +49,7 @@ void writer(FILE *outputFile, Seq_T rawLines)
 
         // (void) outputFile;
         // (void) rawLines;
+
+        /* TODO: Check if we put \n chars at the end of each output */
+        /* TODO: Check if we need to fix atom memory leaks */
 }
