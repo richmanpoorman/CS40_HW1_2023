@@ -16,7 +16,10 @@
 #include "LinePackage.h"
 #include <stdbool.h>
 
+#include <stdio.h>  //TODO:: REMOVE THIS AFTER TESTING
+
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
+static void freeInjectedTable(const void *key, void **value, void *cl);
 
 // TODO: Write function descriptions
 Seq_T cleaner(Seq_T corruptedLines)
@@ -27,7 +30,7 @@ Seq_T cleaner(Seq_T corruptedLines)
         bool foundOriginal = false;
 
         // The stores the first instance of each injection sequence, connected to it's cleaned line
-        Table_T injectionSequences = Table_new(Seq_length(corruptedLines) / 2, NULL, NULL);
+        Table_T injectionTable = Table_new(Seq_length(corruptedLines) / 2, NULL, NULL);
 
         // clean every line sequentially
         while (Seq_length(corruptedLines) > 0) {
@@ -39,7 +42,7 @@ Seq_T cleaner(Seq_T corruptedLines)
 
                 const char *injectedAtom = Atom_new(LinePackage_byteList(injected), LinePackage_size(injected));
                 
-                LinePackage inTable = Table_get(injectionSequences, injectedAtom);
+                LinePackage inTable = Table_get(injectionTable, injectedAtom);
 
                 if (inTable != NULL) {
                         if (!foundOriginal) {
@@ -49,11 +52,14 @@ Seq_T cleaner(Seq_T corruptedLines)
                         Seq_addhi(cleanedLines, line);
                 }
                 else {
-                        Table_put(injectionSequences, injectedAtom, line);
+                        Table_put(injectionTable, injectedAtom, line);
                 }
                 
                 LinePackage_free(injected); // TODO:: May free up when atom references
         }
+
+        Table_map(injectionTable, freeInjectedTable, NULL);
+        Table_free(&injectionTable);
 
         return cleanedLines;
 }
@@ -72,7 +78,7 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
         char   *injectedCharacters = ALLOC(size * sizeof(char));
         size_t  injectedWriteHead  = 0;
 
-        // TODO: reorganize this, make it more readable
+        
         for (size_t readHead = 0; readHead < size; readHead++) {
                 char byte = byteList[readHead];
                 if (byte >= '0' && byte <= '9') {
@@ -106,4 +112,16 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
         *injected = LinePackage_new(injectedCharacters, injectedWriteHead);
 
         return line;
+}
+
+static void freeInjectedTable(const void *key, void **value, void *cl) 
+{
+        if ((LinePackage *)value == NULL) {
+                
+                printf("There was nothing at the key %s\n", (char *)key);
+        }
+        LinePackage val = *value;
+        LinePackage_free(val);
+        (void) key;
+        (void) cl;
 }
