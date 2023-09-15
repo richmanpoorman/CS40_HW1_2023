@@ -57,7 +57,7 @@ with open(FILE_NAME + ".txt", "w", encoding = "utf-8") as file, open(FILE_NAME +
             print("Add Fake Line")
             fakeLineData : list = makeNumbers()
             fakeInject : str    = makeInjectionStr()
-            while fakeInject not in seen:
+            while fakeInject in seen:
                 fakeInject : str = makeInjectionStr()
             fakeLine : str = corruptLine(fakeLineData, fakeInject) + "\n"
             file.write(fakeLine)
