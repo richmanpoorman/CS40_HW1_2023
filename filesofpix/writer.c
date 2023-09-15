@@ -23,7 +23,7 @@ void writer(FILE *outputFile, Seq_T rawLines)
 
         /* determine width and height */
         size_t width, height;   /* TODO: Check if this is proper style */
-        width = LinePackage_size(Seq_get(rawLines, 0)) - 1;    /* -1 for \n */
+        width = LinePackage_size(Seq_get(rawLines, 0));    /* -1 for \n */
         height = Seq_length(rawLines);
 
         /* print width and height */
