@@ -19,18 +19,21 @@
 #include <stdio.h>  //TODO:: REMOVE THIS AFTER TESTING
 
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
-static void freeInjectedTable(const void *key, void **value, void *cl);
 
 // TODO: Write function descriptions
 Seq_T cleaner(Seq_T corruptedLines)
 {
+        size_t defaultSize = Seq_length(corruptedLines) / 2;
+
         // make new Seq_T to store cleaned lines
-        Seq_T cleanedLines = Seq_new(1);
+        Seq_T cleanedLines = Seq_new(defaultSize);
 
         bool foundOriginal = false;
-
+        LinePackage original = NULL;
         // The stores the first instance of each injection sequence, connected to it's cleaned line
-        Table_T injectionTable = Table_new(Seq_length(corruptedLines) / 2, NULL, NULL);
+        Table_T injectionTable = Table_new(defaultSize, NULL, NULL);
+
+        Seq_T allValues = Seq_new(defaultSize);
 
         // clean every line sequentially
         while (Seq_length(corruptedLines) > 0) {
@@ -48,18 +51,28 @@ Seq_T cleaner(Seq_T corruptedLines)
                         if (!foundOriginal) {
                                 Seq_addhi(cleanedLines, inTable);
                                 foundOriginal = true;
+                                original = inTable;
                         }
                         Seq_addhi(cleanedLines, line);
                 }
                 else {
                         Table_put(injectionTable, injectedAtom, line);
+                        Seq_addhi(allValues, line);
                 }
                 
                 LinePackage_free(injected); // TODO:: May free up when atom references
         }
 
-        Table_map(injectionTable, freeInjectedTable, NULL);
+        while (Seq_length(allValues) > 0) {
+                LinePackage val = Seq_remlo(allValues);
+                if (val != original) {
+                        LinePackage_free(val);
+                }
+                
+        }
+        Seq_free(&allValues);
         Table_free(&injectionTable);
+        
 
         return cleanedLines;
 }
@@ -112,16 +125,4 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
         *injected = LinePackage_new(injectedCharacters, injectedWriteHead);
 
         return line;
-}
-
-static void freeInjectedTable(const void *key, void **value, void *cl) 
-{
-        if ((LinePackage *)value == NULL) {
-                
-                printf("There was nothing at the key %s\n", (char *)key);
-        }
-        LinePackage val = *value;
-        LinePackage_free(val);
-        (void) key;
-        (void) cl;
 }
