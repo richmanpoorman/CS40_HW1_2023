@@ -127,28 +127,32 @@ int main(int argc, char *argv[])
         // printf("Hello World!\n"); // RESULT: WORKED
         
         FILE *inputFile  = NULL;
-        FILE *outputFile = NULL;        // TODO: Check if we free these pointers
+        FILE *outputFile = stdout;        // TODO: Check if we free these pointers
         
-        char *defaultOutputFileName = "uncorrputed.pgm";
+        /* char *defaultOutputFileName = "uncorrputed.pgm"; */
         // TODO :: Put in the error codes for no input file
         if (argc < 2) {
                 printf("No input file was given!\n");
                 return 0;
         }
 
-        if (argc < 3) {
-                printf("File given! Opening file...\n");
-                inputFile = fopen(argv[1], "r");
-                if (inputFile == NULL) {
-                        printf("File opening failed! %s\n", argv[1]);
-                        return 0;
-                }
-                else {
-                        printf("File opening success! %s\n", argv[1]);
-                }
+        /* TODO: write comments for this */
+        printf("File given! Opening file...\n");
+        inputFile = fopen(argv[1], "r");
+        if (inputFile == NULL) {
+                printf("File opening failed! %s\n", argv[1]);
+                return 0;
+        }
+        else {
+                printf("File opening success! %s\n", argv[1]);
+        }
+
+        if (argc > 2) {
+                printf("File given! Opening %s file...\n", argv[2]);
+                outputFile = fopen(argv[2], "w");
         }
         
-        test(inputFile, stdout);
+        test(inputFile, outputFile);
 
         if (inputFile != NULL) { // This closes the file when we reach the end
                 printf("Closed the file\n");
@@ -161,6 +165,6 @@ int main(int argc, char *argv[])
         // (void) test;
         // (void) datapp;
         // (void) readalineSize;
-        (void) defaultOutputFileName;
+        // (void) defaultOutputFileName;
         (void) outputFile;
 }
