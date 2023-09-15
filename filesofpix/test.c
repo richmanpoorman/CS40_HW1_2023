@@ -10,10 +10,10 @@
 #include "cleaner.h"
 #include "readaline.h"
 #include "stringToBytes.h"
+#include "writer.h"
 // size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
 
 // TODO: fix function formatting
-
 
 void printBytes(char *bytes, size_t size) {
         for (size_t i = 0; i < size; i++) {
@@ -81,7 +81,8 @@ void testCleaner(FILE *inputFile) {
         freeTestSequence(cleanedData);
 }
 // TEST EDGE CASE: 10 IS A NUMBER IN THE FILE
-void testStringToBytes(FILE *inputFile) {
+void testStringToBytes(FILE *inputFile) 
+{
         Seq_T dirtyData   = reader(inputFile);
         Seq_T cleanedData = cleaner(dirtyData);
         Seq_T rawData     = stringToBytes(cleanedData);
@@ -92,14 +93,29 @@ void testStringToBytes(FILE *inputFile) {
         freeTestSequence(rawData);
 }
 
-void test(FILE *inputFile) 
+void testWriter(FILE *inputFile, FILE *outputFile)
 {
-        testStringToBytes(inputFile);
+        Seq_T dirtyData   = reader(inputFile);
+        Seq_T cleanedData = cleaner(dirtyData);
+        Seq_T rawData     = stringToBytes(cleanedData);
+        writer(outputFile, rawData);
+
+        Seq_free(&dirtyData);
+        Seq_free(&cleanedData);
+
+        freeTestSequence(rawData);
+}
+
+void test(FILE *inputFile, FILE *outputFile) 
+{
+        // testStringToBytes(inputFile);
         // testCleaner(inputFile);
         // testReader(inputFile);
         // testLinePackageNew();
         // testReadaline(inputFile);
+        testWriter(inputFile, outputFile);
         (void) inputFile;
+        (void) outputFile;
 }
 
 int main(int argc, char *argv[]) 
@@ -132,7 +148,7 @@ int main(int argc, char *argv[])
                 }
         }
         
-        test(inputFile);
+        test(inputFile, stdout);
 
         if (inputFile != NULL) { // This closes the file when we reach the end
                 printf("Closed the file\n");

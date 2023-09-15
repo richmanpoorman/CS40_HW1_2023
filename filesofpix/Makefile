@@ -19,7 +19,7 @@ EXECUTABLES = restoration
 #  files it really uses.
 #
 # Add your own .h files to the right side of the assingment below.
-INCLUDES = LinePackage.h reader.h cleaner.h stringToBytes.h
+INCLUDES = LinePackage.h reader.h cleaner.h stringToBytes.h writer.h
 
 # Do all C compies with gcc (at home you could try clang)
 CC = gcc
@@ -81,8 +81,8 @@ clean:
 #    Those .o files are linked together to build the corresponding
 #    executable.
 #
-restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o
-	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o $(LDLIBS)
+restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o writer.o
+	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o writer.o $(LDLIBS)
 
 #
 # Other Shortcuts worth nothing
@@ -91,5 +91,5 @@ restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o stringTo
 #
 
 # executable that makes the test.c file and runs it TODO: Fix description
-test: test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o
-	$(CC) $(LDFLAGS) -o test test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o $(LDLIBS)
+test: test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o writer.o
+	$(CC) $(LDFLAGS) -o test test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o writer.o $(LDLIBS)
