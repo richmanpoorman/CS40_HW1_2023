@@ -100,16 +100,18 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
                         byteList[writeHead] = byte;
                         writeHead++;
                 }
-                else if (byte == '\n') {
+                /* else if (byte == '\n') {
                         if (placedSpace) {
                                 writeHead--;
                         }
                         byteList[writeHead] = byte;
                         writeHead++;
-                }
+                } */
                 else {
-                        injectedCharacters[injectedWriteHead] = byte;
-                        injectedWriteHead++;
+                        if (byte != '\n') {
+                                injectedCharacters[injectedWriteHead] = byte;
+                                injectedWriteHead++;
+                        }
 
                         if (hasNum && !placedSpace) {
                                 byteList[writeHead] = ' ';
