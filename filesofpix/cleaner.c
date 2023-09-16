@@ -21,7 +21,7 @@
 #include <stdio.h>  //TODO:: REMOVE THIS AFTER TESTING
 
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
-
+Seq_T cleaner(Seq_T corruptedLines);
 // TODO: Write function descriptions
 Seq_T cleaner(Seq_T corruptedLines)
 {
@@ -47,8 +47,10 @@ Seq_T cleaner(Seq_T corruptedLines)
                 LinePackage injected;
                 line = cleanSingleLine(line, &injected); 
 
-                const char *injectedAtom = Atom_new(LinePackage_byteList(injected), LinePackage_size(injected));
-                
+                char   *injectedCharacters = LinePackage_byteList(injected);
+                size_t  injectedSize       = LinePackage_size(injected);
+
+                const char *injectedAtom = Atom_new(injectedCharacters, injectedSize);
                 LinePackage inTable = Table_get(injectionTable, injectedAtom);
 
                 if (inTable != NULL) {
@@ -64,7 +66,7 @@ Seq_T cleaner(Seq_T corruptedLines)
                         Seq_addhi(allValues, line);
                 }
                 
-                LinePackage_free(injected); // TODO:: May free up when atom references
+                LinePackage_free(injected); 
         }
 
         while (Seq_length(allValues) > 0) {
@@ -77,7 +79,6 @@ Seq_T cleaner(Seq_T corruptedLines)
         Seq_free(&allValues);
         Table_free(&injectionTable);
         
-
         return cleanedLines;
 }
 
