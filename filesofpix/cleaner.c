@@ -91,6 +91,11 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
         char   *injectedCharacters = ALLOC(size * sizeof(char));
         size_t  injectedWriteHead  = 0;
 
+        /* Throw Checked Runtime Error if ALLOC returned NULL */
+        if (injectedCharacters == NULL) {
+                exit(1);        // TODO: Check if this is a Checked Runtime Error
+        }
+
         
         for (size_t readHead = 0; readHead < size; readHead++) {
                 char byte = byteList[readHead];

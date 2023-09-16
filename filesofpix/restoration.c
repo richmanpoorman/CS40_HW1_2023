@@ -39,22 +39,19 @@ int main(int argc, char *argv[])
         
         // char *defaultOutputFileName = "uncorrputed.pgm";
         // TODO :: Put in the error codes for no input file
-        if (argc < 2) {
-                printf("No input file was given!\n");   /* TODO: Check if this is needed */
-                return 0;
-        }
-
-        /* open file */
-        if (argc < 3) {
+        if (argc == 2) {         /* open file */
                 // printf("File given! Opening file...\n");
                 inputFile = fopen(argv[1], "r");
                 if (inputFile == NULL) {
-                        printf("File opening failed! %s\n", argv[1]);   /* TODO: Check if this is meant to be printed */
-                        return 0;
+                        exit(1);
+                        // printf("File opening failed! %s\n", argv[1]);   /* TODO: Check if this is meant to be printed */
+                        // return 0;
                 }
                 /* else {
                         // printf("File opening success! %s\n", argv[1]);
                 } */
+        } else {        /* Throw Checked Runtime Error because more than one argument supplied / no input file given*/
+                exit(1);
         }
 
         /* read in data */

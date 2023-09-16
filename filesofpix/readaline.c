@@ -30,7 +30,7 @@ size_t readaline(FILE *inputfd, char **datapp)
 
         char *buffer = ALLOC(1000);
         
-        if (buffer == NULL) {
+        if (buffer == NULL) {   // TODO: Do they want a try catch for this?
                 exit(1);        // TODO: Check if this exits with a checked runtime error
         }
 
