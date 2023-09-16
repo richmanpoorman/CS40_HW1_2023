@@ -1,9 +1,9 @@
 from random import randint
 from random import random 
 
-FILE_NAME : str = "possibleFile1"
-dimensions = (10, 10) # Line Count, Line Size (in terms of numbers)
-injectLineSize = 20
+FILE_NAME : str = "possible3"
+dimensions = (2000, 2000) # Line Count, Line Size (in terms of numbers)
+injectLineSize = 3000
 fakeLineChance = 0.1 # 0...fakeLineChance is pulled, and 
 
 
@@ -51,20 +51,20 @@ with open(FILE_NAME + ".txt", "w", encoding = "utf-8") as file, open(FILE_NAME +
     seen : set = {realLine}
     for lineCount in range(dimensions[0]):
 
-        print("Line", lineCount)
+        # print("Line", lineCount)
         # Write in a bunch of fake lines
         while (random() < fakeLineChance):
-            print("Add Fake Line")
+        #     print("Add Fake Line")
             fakeLineData : list = makeNumbers()
             fakeInject : str    = makeInjectionStr()
             while fakeInject in seen:
                 fakeInject : str = makeInjectionStr()
             fakeLine : str = corruptLine(fakeLineData, fakeInject) + "\n"
             file.write(fakeLine)
-            print("Fake Line:", fakeLine)
+        #     print("Fake Line:", fakeLine)
         
         # Make the real line
-        print("Add Real Line")
+        # print("Add Real Line")
         numData  = makeNumbers() 
         injected = makeInjectionStr()
         line     = corruptLine(numData, realLine) + "\n"
@@ -72,7 +72,7 @@ with open(FILE_NAME + ".txt", "w", encoding = "utf-8") as file, open(FILE_NAME +
         for num in numData:
             fileAns.write(str(num) +" ")
         fileAns.write("\n")
-        print("Real Line", line)
+        # print("Real Line", line)
         file.write(line)
 
         
