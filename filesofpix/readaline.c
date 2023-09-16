@@ -22,8 +22,8 @@
  *
  * Resizes the data buffer size
  * Inputs:
- *		char **data: pointer to buffer to resize
- *              size_t *capacity: pointer to the buffer current capacity
+ *	char **data: pointer to buffer to resize
+ *      size_t *capacity: pointer to the buffer current capacity
  * Return: nothing
  * Expects
  *      **data and *capacity to not be null. Expects capacity to not be 0.
@@ -38,8 +38,8 @@ void resizeReadLine(char **data, size_t *capacity);
  *
  * reads in a single line from input file and stores the data to datapp
  * Inputs:
- *		FILE *inputfd: pointer to input file
- *              char **datapp: pointer to array of chars (the string of data)
+ *      FILE *inputfd: pointer to input file
+ *      char **datapp: pointer to array of chars (the string of data)
  * Return: size of the read line
  * Expects
  *      TODO: finish expects
