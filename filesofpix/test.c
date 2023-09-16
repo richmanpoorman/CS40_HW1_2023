@@ -28,12 +28,12 @@ void printBytes(char *bytes, size_t size) {
 }
 
 void freeTestSequence(Seq_T testSequence) {
-        // printf("Number of lines: %i\n", Seq_length(testSequence));
+        printf("Number of lines: %i\n", Seq_length(testSequence));
         while (Seq_length(testSequence) > 0) {
                 LinePackage package = Seq_remlo(testSequence);
                 size_t size = LinePackage_size(package);
 
-                // printf("Line Size: %li\n", size);
+                printf("Line Size: %li\n", size);
 
                 char *bytes = LinePackage_byteList(package);
                 
@@ -163,9 +163,8 @@ int main(int argc, char *argv[])
                 printf("No File\n");
         }
         
-        // (void) test;
-        // (void) datapp;
-        // (void) readalineSize;
-        // (void) defaultOutputFileName;
+        if (outputFile != stdout) {
+                fclose(outputFile);
+        }
         (void) outputFile;
 }
