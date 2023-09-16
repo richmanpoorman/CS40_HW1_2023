@@ -35,6 +35,7 @@ size_t readaline(FILE *inputfd, char **datapp)
         }
 
         int currentByte = fgetc(inputfd); // Get the first character
+        /* TODO: potentially write an error thrower if it reads a character it doesn't know */
         
         int endLineCharacter = '\n'; // POSSIBLE TODO:: Change \n to 10 (ASCII Code for new line)
 
