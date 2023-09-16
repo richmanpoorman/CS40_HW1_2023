@@ -48,7 +48,8 @@ size_t readaline(FILE *inputfd, char **datapp)
                 }
                 // If there is some error, break the loop
                 if (ferror(inputfd) != 0) {
-                        break;
+                        exit(1);        // TODO: Check that this throws a Checked Runtime Error
+                        // break;
                 }
                 // Seq_addhi(buffer, &currentByte);
                 // printf("%i\n", currentByte);
