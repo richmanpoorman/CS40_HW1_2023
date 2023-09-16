@@ -4,6 +4,7 @@
  *      hw1: filesofpix
  *
  *      Summary:
+ *      Writes byte data to given output file.
  *      
  *      TODO: write summary for writer.c
  *      
@@ -17,9 +18,6 @@
 /* POTENTIAL TODO: add parameter to writer that is what the maxVal is */
 void writer(FILE *outputFile, Seq_T rawLines) 
 {
-        // /* clear out outputFile stream */
-        // fflush(outputFile);
-
         /* create header */
         /* Second newline character to skip comment line */
         fprintf(outputFile, "P5\n\n");  /* TODO: Check if we print anything in the comment line */
@@ -49,9 +47,6 @@ void writer(FILE *outputFile, Seq_T rawLines)
 
                 LinePackage_free(line);
         }
-
-        // (void) outputFile;
-        // (void) rawLines;
 
         /* TODO: Check if we put \n chars at the end of each output */
         /* TODO: Check if we need to fix atom memory leaks */

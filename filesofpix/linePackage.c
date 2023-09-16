@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <mem.h>
 #include <stdio.h>      // TODO: Remove
+#include <assert.h>
 
 typedef struct LinePackage 
 {
@@ -57,9 +58,10 @@ size_t LinePackage_size(LinePackage byteListStruct)
 
 void LinePackage_set_size(LinePackage byteListStruct, size_t new_size) 
 {
-        if (new_size > byteListStruct -> capacity) {
-                exit(1);        // TODO: Check what error code this should output
-        }
+        assert(new_size < byteListStruct -> capacity);
+        // if (new_size > byteListStruct -> capacity) {
+        //         exit(1);        // TODO: Check what error code this should output
+        // }
 
         byteListStruct -> size = new_size;
 }

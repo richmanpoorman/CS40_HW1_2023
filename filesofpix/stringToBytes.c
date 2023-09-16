@@ -4,8 +4,9 @@
  *      hw1: filesofpix
  *
  *      Summary:
+ *      Converts string data into single byte data.
  *      
- *      write file description for stringToBytes.c
+ *      TODO: write file description for stringToBytes.c
  */
 
 #include <seq.h>

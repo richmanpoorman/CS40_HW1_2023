@@ -4,6 +4,7 @@
  *      hw1: filesofpix
  *
  *      Summary:
+ *      Takes in corrupted data and uncorrupts it.
  *      
  *      TODO: write summary for cleaner.c
  *      
@@ -26,17 +27,17 @@ Seq_T cleaner(Seq_T corruptedLines)
 {
         size_t defaultSize = Seq_length(corruptedLines) / 2;
 
-        // make new Seq_T to store cleaned lines
+        /* make new Seq_T to store cleaned lines */
         Seq_T cleanedLines = Seq_new(defaultSize);
 
         bool foundOriginal = false;
         LinePackage original = NULL;
-        // The stores the first instance of each injection sequence, connected to it's cleaned line
+        /* The stores the first instance of each injection sequence, connected to it's cleaned line */
         Table_T injectionTable = Table_new(defaultSize, NULL, NULL);
 
         Seq_T allValues = Seq_new(defaultSize);
 
-        // clean every line sequentially
+        /* clean every line sequentially */
         while (Seq_length(corruptedLines) > 0) {
                 
                 LinePackage line = Seq_remlo(corruptedLines);
@@ -79,7 +80,6 @@ Seq_T cleaner(Seq_T corruptedLines)
 }
 
 // TODO: Test clean_single_line and test cleaner
-// TODO: finish cleaner.
 
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
 {
@@ -106,15 +106,7 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
                         placedSpace = false;
                         byteList[writeHead] = byte;
                         writeHead++;
-                }
-                /* else if (byte == '\n') {
-                        if (placedSpace) {
-                                writeHead--;
-                        }
-                        byteList[writeHead] = byte;
-                        writeHead++;
-                } */
-                else {
+                } else {
                         if (byte != '\n') {
                                 injectedCharacters[injectedWriteHead] = byte;
                                 injectedWriteHead++;
