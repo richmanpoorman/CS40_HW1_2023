@@ -11,70 +11,81 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "mem.h"
+
+#include <mem.h>
+#include <assert.h>
 
 #include "readaline.h"
 
-
+void resizeReadLine(char **data, size_t *capacity);
 
 size_t readaline(FILE *inputfd, char **datapp) 
 {
-        if (inputfd == NULL || datapp == NULL) {
-                exit(1);        // TODO: Check if this exits with a checked runtime error
-        }
+        /* If either inputfd is null or datapp is null, cre */
+        assert(inputfd != NULL && datapp != NULL);
 
-        if (feof(inputfd) != 0) {
-                *datapp = NULL;
-                return 0;
-        } 
+        /* If it starts with an empty file, cre */
+        assert(feof(inputfd) == 0);
 
-        char *buffer = ALLOC(1000);
+        size_t  capacity = 512;
+        char   *buffer   = ALLOC(capacity * sizeof(*buffer));
         
-        if (buffer == NULL) {   // TODO: Do they want a try catch for this?
-                exit(1);        // TODO: Check if this exits with a checked runtime error
-        }
+        /* If buffer can't alloc */
+        assert(buffer != NULL);
 
-        int currentByte = fgetc(inputfd); // Get the first character
-        /* TODO: potentially write an error thrower if it reads a character it doesn't know */
-        
-        int endLineCharacter = '\n'; // POSSIBLE TODO:: Change \n to 10 (ASCII Code for new line)
+        size_t writerHead = 0;
+        int    currentByte = fgetc(inputfd);
+        int    endLineCharacter = '\n'; 
 
-        // While we haven't reached the end of file and the character is not at the end of line
-        size_t i = 0;
         while (feof(inputfd) == 0 && currentByte != endLineCharacter) {
-                if (i >= 1000) {
-                        fprintf(stderr, "readaline: input line too long\n");
-                        exit(4);
+                /* If trying to write past the line size, expand */
+                if (writerHead >= capacity) { 
+                        resizeReadLine(&buffer, &capacity);
                 }
-                // If there is some error, break the loop
-                if (ferror(inputfd) != 0) {
-                        exit(1);        // TODO: Check that this throws a Checked Runtime Error
-                        // break;
-                }
-                // Seq_addhi(buffer, &currentByte);
-                // printf("%i\n", currentByte);
-                buffer[i] = (char)currentByte;
+
+                /* If error when reading, cre */
+                assert(ferror(inputfd) == 0);
+
+                buffer[writerHead] = (char)currentByte;
 
                 currentByte = fgetc(inputfd); // Go to the next character
-                i++;
-                
+                writerHead++;
         }
 
         // TODO: write a comment explaining what this if statement does
         if (currentByte == endLineCharacter) {
-                if (i >= 1000) {
-                        fprintf(stderr, "readaline: input line too long\n");
-                        exit(4);
+                /* If trying to write past the line size, expand */
+                if (writerHead >= capacity) { 
+                        resizeReadLine(&buffer, &capacity);
                 }
                 
-                buffer[i] = endLineCharacter;
-                i++;
-                
+                buffer[writerHead] = endLineCharacter;
+                writerHead++;
         }
 
         *datapp = buffer;
         
-        return i;
+        /* The writerHead is the same as the size of the string */
+        return writerHead;
 }
 
 // TODO: fix the error throwers
+
+void resizeReadLine(char **data, size_t *capacity) {
+        size_t  size     = *capacity;
+        char   *currData = *data;
+        
+        size_t  newSize  = size * 2;
+        char   *newSpace = ALLOC(newSize * sizeof(*newSpace));
+        
+        // Check if the assert is correct
+        assert(newSpace != NULL);
+        
+        for (size_t writerHead = 0; writerHead < size; writerHead++) {
+                newSpace[writerHead] = currData[writerHead];
+        }
+
+        FREE(currData);
+        *data     = newSpace;
+        *capacity = newSize;
+}
