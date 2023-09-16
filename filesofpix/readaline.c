@@ -29,6 +29,7 @@
  *      **data and *capacity to not be null. Expects capacity to not be 0.
  * Notes:
  *      Doubles the capacity of the buffer.
+ *      CRE if memory could not be ALLOC'd
  *
  ************************/
 void resizeReadLine(char **data, size_t *capacity);
