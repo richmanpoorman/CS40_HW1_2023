@@ -20,6 +20,8 @@
 #include <seq.h>
 #include <assert.h>
 
+/* TODO: Check that all asserts in ALL files work */
+
 /* TODO: Fix comment formatting */
 
 // TODO: fix function formatting
@@ -41,7 +43,7 @@ int main(int argc, char *argv[])
                 inputFile = fopen(argv[1], "r");
                 assert(inputFile != NULL);
         }
-        
+
         /* read in data */
         Seq_T dirtyData   = reader(inputFile);
 
@@ -51,7 +53,7 @@ int main(int argc, char *argv[])
         /* convert cleaned data to bytes */
         Seq_T rawData     = stringToBytes(cleanedData);
 
-        /* print the raw P5 PGM */
+        /* output the raw P5 PGM */
         writer(outputFile, rawData);
 
         /* free seq memory */
@@ -61,7 +63,7 @@ int main(int argc, char *argv[])
 
         /* close file */
         if (inputFile != NULL) { /* This closes the file when we reach the 
-                                                                        end */
+                                    end */
                 fclose(inputFile);
         }
         else {
