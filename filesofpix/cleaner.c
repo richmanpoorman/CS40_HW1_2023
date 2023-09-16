@@ -15,6 +15,7 @@
 #include <atom.h>
 #include "LinePackage.h"
 #include <stdbool.h>
+#include <assert.h>
 
 #include <stdio.h>  //TODO:: REMOVE THIS AFTER TESTING
 
@@ -92,9 +93,10 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
         size_t  injectedWriteHead  = 0;
 
         /* Throw Checked Runtime Error if ALLOC returned NULL */
-        if (injectedCharacters == NULL) {
+        assert(injectedCharacters != NULL);
+        /* if (injectedCharacters == NULL) {
                 exit(1);        // TODO: Check if this is a Checked Runtime Error
-        }
+        } */
 
         
         for (size_t readHead = 0; readHead < size; readHead++) {

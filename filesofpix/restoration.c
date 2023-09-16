@@ -5,7 +5,8 @@
  *
  *      Summary:
  *      
- *      The program takes in a corrupted P2 PGM, uncorrupts, and writes uncorrupted P5 PGM to a given file
+ *      The program takes in a corrupted P2 PGM, uncorrupts, and writes an uncorrupted P5 PGM to a given file
+ *      TODO: Fix this summary potentially.
  */
 
 #include <stdio.h>
@@ -17,8 +18,7 @@
 #include "stringToBytes.h"
 #include "writer.h"
 #include <seq.h>
-
-// size_t readaline(FILE *inputfd, char **datapp); //TODO :: Remove this
+#include <assert.h>
 
 /* TODO: Fix comment formatting */
 
@@ -26,34 +26,22 @@
 
 // TODO: make sure all chars are unsigned chars—This might not be necessary
 
+/* TODO: replace all exit(1) with asserts */
+
 int main(int argc, char *argv[]) 
 {
-        // TODO:: Read the file names and open the appropriate file
-        // (void) argc; 
-        // (void) argv;
-        
-        // printf("Hello World!\n"); // RESULT: WORKED
-        
         FILE *inputFile  = NULL;
         FILE *outputFile = stdout;
-        
-        // char *defaultOutputFileName = "uncorrputed.pgm";
-        // TODO :: Put in the error codes for no input file
-        if (argc == 2) {         /* open file */
-                // printf("File given! Opening file...\n");
-                inputFile = fopen(argv[1], "r");
-                if (inputFile == NULL) {
-                        exit(1);
-                        // printf("File opening failed! %s\n", argv[1]);   /* TODO: Check if this is meant to be printed */
-                        // return 0;
-                }
-                /* else {
-                        // printf("File opening success! %s\n", argv[1]);
-                } */
-        } else {        /* Throw Checked Runtime Error because more than one argument supplied / no input file given*/
-                exit(1);
-        }
 
+        /* Check that we have the required inputs—no more, no less */
+        assert(argc == 2);
+        
+        /* open file */
+        if (argc == 2) {         
+                inputFile = fopen(argv[1], "r");
+                assert(inputFile != NULL);
+        }
+        
         /* read in data */
         Seq_T dirtyData   = reader(inputFile);
 
@@ -71,18 +59,12 @@ int main(int argc, char *argv[])
         Seq_free(&cleanedData);
         Seq_free(&rawData);
 
-        // close file
-        if (inputFile != NULL) { // This closes the file when we reach the end
-                /* printf("Closed the file\n"); */
+        /* close file */
+        if (inputFile != NULL) { /* This closes the file when we reach the 
+                                                                        end */
                 fclose(inputFile);
         }
         else {
                 printf("No File\n");    /* TODO: Check if this is needed */
         }
-        
-        // (void) test;
-        // (void) datapp;
-        // (void) readalineSize;
-        /* (void) defaultOutputFileName;
-        (void) outputFile; */
 }

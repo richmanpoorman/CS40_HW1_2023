@@ -18,6 +18,7 @@
 #include <mem.h>
 #include "LinePackage.h"
 #include "readaline.h"
+#include <assert.h>
 
 /* TODO: Check if reader needs a function contract to fulfil style guide */
 /**********reader********
@@ -33,13 +34,10 @@
  ************************/
 Seq_T reader(FILE *inputFile)
 {
-        if (inputFile == NULL) {
-                exit(1);        // TODO: Check if this exits with a checked runtime error
-        }
+        /* Check that inputFile is good */
+        assert(inputFile != NULL);
 
         char *datapp;
-        // printf("ALLOC'd datapp at %p\n", (void*) datapp);
-        /* TODO: delete the printf statements */
 
         size_t size = readaline(inputFile, &datapp);
 
@@ -53,8 +51,7 @@ Seq_T reader(FILE *inputFile)
                 size = readaline(inputFile, &datapp);
         }
 
-        // Deallocate datapp memory;
-        // printf("FREE'd datapp at %p\n", (void*) datapp);
+        /* Deallocate datapp memory */
         FREE(datapp);
 
         return lines;
