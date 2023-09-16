@@ -24,6 +24,8 @@
 
 // TODO: fix function formatting
 
+// TODO: make sure all chars are unsigned chars—This might not be necessary
+
 int main(int argc, char *argv[]) 
 {
         // TODO:: Read the file names and open the appropriate file
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
         FILE *inputFile  = NULL;
         FILE *outputFile = stdout;
         
-        char *defaultOutputFileName = "uncorrputed.pgm";
+        // char *defaultOutputFileName = "uncorrputed.pgm";
         // TODO :: Put in the error codes for no input file
         if (argc < 2) {
                 printf("No input file was given!\n");   /* TODO: Check if this is needed */
@@ -84,6 +86,6 @@ int main(int argc, char *argv[])
         // (void) test;
         // (void) datapp;
         // (void) readalineSize;
-        (void) defaultOutputFileName;
-        (void) outputFile;
+        /* (void) defaultOutputFileName;
+        (void) outputFile; */
 }
