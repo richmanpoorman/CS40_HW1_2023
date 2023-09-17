@@ -70,6 +70,7 @@ size_t readaline(FILE *inputfd, char **datapp)
         /* If buffer can't alloc */
         if (buffer == NULL) {
                 fprintf(stderr, "readaline: input line too long\n");    /* TODO: Check that this works */
+                /* TODO: The spec says that if the line is too long, we should exit(4) but it also says that if memory allocation fails we should CRE. Which do we do in this situation? */
         }
         assert(buffer != NULL);
 
