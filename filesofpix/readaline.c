@@ -16,7 +16,7 @@
 #include <mem.h>
 #include <assert.h>
 
-#include "readaline.h"
+#include "readaline.h"  /* TODO: This include is necessary for spec–DO NOT DELETE */
 
 /**********resizeReadLine********
  *
@@ -47,12 +47,14 @@ void resizeReadLine(char **data, size_t *capacity);
  *      Expects the string allocated by readaline to be freed elsewhere
  * Notes:
  *      CRE if *inputfd or **datapp is NULL.
- *      CRE if *inputfd is eof.
+ *      CRE if *inputfd is eof. TODO: Check if this is meant to happen
  *      CRE if buffer memory could not be ALLOC'd
  *      CRE if readaline encounters error reading in from input file
  *
  ************************/
 size_t readaline(FILE *inputfd, char **datapp);
+
+/* TODO: readaline leaves the file seek pointer at the first (i.e., unread) character of the following line (if any) or at EOF */
 
 size_t readaline(FILE *inputfd, char **datapp) 
 {
