@@ -56,58 +56,84 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
 void freeTablePackages(const void *key, void **value, void *cl);
 
 Seq_T cleaner(Seq_T corruptedLines);
+
 // TODO: Write function descriptions
 Seq_T cleaner(Seq_T corruptedLines)
 {
-        /* TODO: Write a comment to TA's saying that there isn't a way to easily break this function up better */
+        
 
         size_t defaultSize = Seq_length(corruptedLines) / 2;
 
         /* make new Seq_T to store cleaned lines */
         Seq_T cleanedLines = Seq_new(defaultSize);
 
-        
+        /* Stores what the injected line of real rows is */
         LinePackage original = NULL;
-        /* The stores the first instance of each injection sequence, connected to it's cleaned line */
+
+        /*  The stores the first instance of each injection sequence,
+         *  which connects to it's cleaned line in order to retrieve
+         *  the line value of the first non-injected line when the 
+         *  same line injection is found the second time 
+         */
         Table_T injectionTable = Table_new(defaultSize, NULL, NULL);
         
 
-        /* clean every line sequentially */
+        /*  clean every line sequentially 
+         *  Note that it is hard to break up the function as it is part of 
+         *  an algorithm to clean the sequence, with most of the lines
+         *  just being assigning variables.
+         */
         while (Seq_length(corruptedLines) > 0) {
-                
+                /* Get the line, as well as what is the 'duplicated' key */
                 LinePackage line = Seq_remlo(corruptedLines);
 
+                /* Gets the cleaned line, and the injected sequence */
                 LinePackage injected;
                 line = cleanSingleLine(line, &injected); 
 
+                /* Gets the data of the injected string */
                 char   *injectedCharacters = LinePackage_byteList(injected);
                 size_t  injectedSize       = LinePackage_size(injected);
 
-                const char *injectedAtom = Atom_new(injectedCharacters, injectedSize);
-                LinePackage inTable = Table_get(injectionTable, injectedAtom);
+                /*  Turns the injected character into a table key, 
+                 *  and retrieves the value in the table, if it exists
+                 */
+                const char  *injectedAtom = Atom_new(injectedCharacters, 
+                                                     injectedSize);
+                LinePackage  inTable      = Table_get(injectionTable, 
+                                                      injectedAtom);
 
+                /*   If it is in the table, then it is a real string 
+                 *   as only the real strings have duplicates,
+                 *   otherwise put it in the table as it has the potential
+                 *   for a duplicate
+                 */
                 if (inTable != NULL) {
+                        /*  If it is the first time seeing the repeated key,
+                         *  Push the key on the table before adding 
+                         *  the key just found
+                         */
                         if (original == NULL) {
                                 Seq_addhi(cleanedLines, inTable);
                                 original = inTable;
-
                         }
                         Seq_addhi(cleanedLines, line);
                 }
                 else {
                         Table_put(injectionTable, injectedAtom, line);
                 }
-                
+
+                /* Update seenInTable with the key */
                 LinePackage_free(injected); 
         }
 
+        /* Frees up the table */
         Table_map(injectionTable, freeTablePackages, original);
         Table_free(&injectionTable);
         
         return cleanedLines;
 }
 
-// TODO: Test clean_single_line and test cleaner
 
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
 {
@@ -117,7 +143,7 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
         char   *byteList    = LinePackage_byteList(line);
         size_t  size        = LinePackage_size(line);
 
-        char   *injectedCharacters = ALLOC(size * sizeof(char));
+        char   *injectedCharacters = ALLOC(size * sizeof(*injectedCharacters));
         size_t  injectedWriteHead  = 0;
 
         /* Throw Checked Runtime Error if ALLOC returned NULL */
@@ -154,10 +180,15 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
 
 void freeTablePackages(const void *key, void **value, void *cl) {
 
+        /*   Free the LinePackage in the table if it is
+         *   an injected string; only one string in the 
+         *   table is not the injected, which is passed 
+         *   through cl
+         */
         LinePackage original = cl;
         LinePackage inTable  = *value;
         if (inTable != original) {
                 FREE(inTable);
         }
-        (void) key;     /* TODO: write comment that explains why this lien is necessary */
+        (void) key; /* Don't need the key value */
 }
