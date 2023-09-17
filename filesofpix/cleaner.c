@@ -20,8 +20,41 @@
 
 #include <stdio.h>  //TODO:: REMOVE THIS AFTER TESTING
 
+/* TODO: Finish this function description */
+/**********cleanSingleLine********
+ *
+ * Remove corrupted characters from a single line
+ * Inputs:
+ *      LinePackage line: the line to clean
+ *      LinePackage *injected: pointer to linepackage to store corrupted data to
+ * Return: A linepackage without any corrupted characters
+ * Expects
+ *      line to be a valid linepackage. TODO: improve this
+ *      *injected to be nonnull
+ * Notes:
+ *      Will store all the digits characters in line, and all the
+ *      corrupted characters in *injected
+ *
+ ************************/
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
+
+/* TODO: Finish this function description */
+/**********freeTablePackages********
+ *
+ * FREE's all allocated memory of table TODO: Improve this
+ * Inputs:
+ *      const void *key: TODO: Explain key
+ *      void **value: TODO: explain this variable
+ *      void *cl: TODO: explain this variable
+ * Return: nothing
+ * Expects
+ *      *key, **value, *cl to be nonnull. TODO: check that this is true
+ * Notes:
+ *      TODO: Finish notes
+ *
+ ************************/
 void freeTablePackages(const void *key, void **value, void *cl);
+
 Seq_T cleaner(Seq_T corruptedLines);
 // TODO: Write function descriptions
 Seq_T cleaner(Seq_T corruptedLines)
@@ -126,5 +159,5 @@ void freeTablePackages(const void *key, void **value, void *cl) {
         if (inTable != original) {
                 FREE(inTable);
         }
-        (void) key;
+        (void) key;     /* TODO: write comment that explains why this lien is necessary */
 }
