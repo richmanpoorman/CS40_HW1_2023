@@ -21,6 +21,7 @@
 #include <stdio.h>  //TODO:: REMOVE THIS AFTER TESTING
 
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
+void freeTablePackages(const void *key, void **value, void *cl);
 Seq_T cleaner(Seq_T corruptedLines);
 // TODO: Write function descriptions
 Seq_T cleaner(Seq_T corruptedLines)
@@ -32,12 +33,11 @@ Seq_T cleaner(Seq_T corruptedLines)
         /* make new Seq_T to store cleaned lines */
         Seq_T cleanedLines = Seq_new(defaultSize);
 
-        bool foundOriginal = false;
+        
         LinePackage original = NULL;
         /* The stores the first instance of each injection sequence, connected to it's cleaned line */
         Table_T injectionTable = Table_new(defaultSize, NULL, NULL);
-
-        Seq_T allValues = Seq_new(defaultSize);
+        
 
         /* clean every line sequentially */
         while (Seq_length(corruptedLines) > 0) {
@@ -54,29 +54,21 @@ Seq_T cleaner(Seq_T corruptedLines)
                 LinePackage inTable = Table_get(injectionTable, injectedAtom);
 
                 if (inTable != NULL) {
-                        if (!foundOriginal) {
+                        if (original == NULL) {
                                 Seq_addhi(cleanedLines, inTable);
-                                foundOriginal = true;
                                 original = inTable;
+
                         }
                         Seq_addhi(cleanedLines, line);
                 }
                 else {
                         Table_put(injectionTable, injectedAtom, line);
-                        Seq_addhi(allValues, line);
                 }
                 
                 LinePackage_free(injected); 
         }
 
-        while (Seq_length(allValues) > 0) {
-                LinePackage val = Seq_remlo(allValues);
-                if (val != original) {
-                        LinePackage_free(val);
-                }
-                
-        }
-        Seq_free(&allValues);
+        Table_map(injectionTable, freeTablePackages, original);
         Table_free(&injectionTable);
         
         return cleanedLines;
@@ -97,11 +89,7 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
 
         /* Throw Checked Runtime Error if ALLOC returned NULL */
         assert(injectedCharacters != NULL);
-        /* if (injectedCharacters == NULL) {
-                exit(1);        // TODO: Check if this is a Checked Runtime Error
-        } */
 
-        
         for (size_t readHead = 0; readHead < size; readHead++) {
                 char byte = byteList[readHead];
                 if (byte >= '0' && byte <= '9') {
@@ -129,4 +117,14 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
         *injected = LinePackage_new(injectedCharacters, injectedWriteHead);
 
         return line;
+}
+
+void freeTablePackages(const void *key, void **value, void *cl) {
+
+        LinePackage original = cl;
+        LinePackage inTable  = *value;
+        if (inTable != original) {
+                FREE(inTable);
+        }
+        (void) key;
 }
