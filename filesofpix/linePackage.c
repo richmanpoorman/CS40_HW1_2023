@@ -25,7 +25,7 @@ typedef struct LinePackage
  *
  * Creates a new linepackage struct
  * Inputs:
- *      char *bytes: list of bytes to store      TODO: Improve this
+ *      char *bytes: list of bytes to store      
  *      size_t length: the size of the byte list to store
  * Return: A linepackage struct furnished with the given data
  * Expects
