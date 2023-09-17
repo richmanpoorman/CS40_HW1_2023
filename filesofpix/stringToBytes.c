@@ -14,9 +14,34 @@
 
 #include "LinePackage.h"
 
-
+/* TODO: Finish this function */
+/**********convertSingleLine********
+ *
+ * Converts a single line of digit bytes to character bytes
+ * Inputs:
+ *      LinePackage line: the line to convert
+ * Return: a linepackage with the converted line
+ * Expects
+ *      line to be a valid linepackage. TODO: improve this
+ * Notes:
+ *      will always end line WITHOUT \n character
+ *
+ ************************/
 LinePackage convertSingleLine(LinePackage line);
 
+/* TODO: Finish this function */
+/**********stringToBytes********
+ *
+ * Converts data of digit bytes to character bytes
+ * Inputs:
+ *      LinePackage line: the line to convert
+ * Return: a linepackage with the converted line
+ * Expects
+ *      line to be a valid linepackage. TODO: improve this
+ * Notes:
+ *      will always end line WITHOUT \n character
+ *
+ ************************/
 Seq_T stringToBytes(Seq_T cleanedLines)
 {
         Seq_T rawLines = Seq_new(1);
