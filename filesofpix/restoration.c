@@ -20,10 +20,6 @@
 #include <seq.h>
 #include <assert.h>
 
-/* TODO: Check that all asserts in ALL files work */
-
-/* TODO: Fix comment formatting */
-
 // TODO: fix function formatting
 
 // TODO: make sure all chars are unsigned chars—This might not be necessary

@@ -5,7 +5,8 @@
  *
  *      Summary:
  *      
- *      TODO: write summary for readaline.c
+ *      Reads a single line which ends at either a 
+ *              \n character or end of file flag
  *      
  */
 
@@ -17,14 +18,13 @@
 
 #include "readaline.h"
 
-/* TODO: Finish this contract description */
 /**********resizeReadLine********
  *
  * Resizes the data buffer size
  * Inputs:
  *	char **data: pointer to buffer to resize
  *      size_t *capacity: pointer to the buffer current capacity
- * Return: nothing
+ * Return: nothing (void)
  * Expects
  *      **data and *capacity to not be null. Expects capacity to not be 0.
  * Notes:
@@ -34,16 +34,17 @@
  ************************/
 void resizeReadLine(char **data, size_t *capacity);
 
-/* TODO: Finish this function contract */
 /**********readaline********
  *
  * reads in a single line from input file and stores the data to datapp
  * Inputs:
  *      FILE *inputfd: pointer to input file
  *      char **datapp: pointer to array of chars (the string of data)
- * Return: size of the read line
+ * Return: size of the read line (size_t)
  * Expects
- *      TODO: finish expects
+ *      Expects the file to be open, and that datapp is the location
+ *      that can be read;
+ *      Expects the string allocated by readaline to be freed elsewhere
  * Notes:
  *      CRE if *inputfd or **datapp is NULL.
  *      CRE if *inputfd is eof.
@@ -52,8 +53,6 @@ void resizeReadLine(char **data, size_t *capacity);
  *
  ************************/
 size_t readaline(FILE *inputfd, char **datapp);
-
-/* TODO: Check if we can have helper functions in readaline */
 
 size_t readaline(FILE *inputfd, char **datapp) 
 {
@@ -73,22 +72,25 @@ size_t readaline(FILE *inputfd, char **datapp)
         int    currentByte = fgetc(inputfd);
         int    endLineCharacter = '\n'; 
 
+        /* If error when reading, cre */
+        assert(ferror(inputfd) == 0);
+
         while (feof(inputfd) == 0 && currentByte != endLineCharacter) {
                 /* If trying to write past the line size, expand */
                 if (writerHead >= capacity) { 
                         resizeReadLine(&buffer, &capacity);
                 }
 
-                /* If error when reading, cre */
-                assert(ferror(inputfd) == 0);
-
                 buffer[writerHead] = (char)currentByte;
 
                 currentByte = fgetc(inputfd); // Go to the next character
                 writerHead++;
+                
+                /* If error when reading, cre */
+                assert(ferror(inputfd) == 0);
         }
 
-        // TODO: write a comment explaining what this if statement does
+        /* Adds the endLineCharacter if it is what the line ended on */
         if (currentByte == endLineCharacter) {
                 /* If trying to write past the line size, expand */
                 if (writerHead >= capacity) { 
@@ -105,8 +107,6 @@ size_t readaline(FILE *inputfd, char **datapp)
         return writerHead;
 }
 
-// TODO: fix the error throwers
-
 void resizeReadLine(char **data, size_t *capacity) {
         size_t  size     = *capacity;
         char   *currData = *data;
@@ -114,7 +114,6 @@ void resizeReadLine(char **data, size_t *capacity) {
         size_t  newSize  = size * 2;
         char   *newSpace = ALLOC(newSize * sizeof(*newSpace));
         
-        // TODO: Check if the assert is correct
         assert(newSpace != NULL);
         
         for (size_t writerHead = 0; writerHead < size; writerHead++) {

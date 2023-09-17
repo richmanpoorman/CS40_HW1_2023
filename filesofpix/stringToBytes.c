@@ -6,7 +6,8 @@
  *      Summary:
  *      Converts string data into single byte data.
  *      
- *      TODO: write file description for stringToBytes.c
+ *      Converts the plain text cleaned digits and turns them
+ *              into raw format strings
  */
 
 #include <seq.h>
@@ -14,34 +15,40 @@
 
 #include "LinePackage.h"
 
-/* TODO: Finish this function */
 /**********convertSingleLine********
  *
  * Converts a single line of digit bytes to character bytes
  * Inputs:
- *      LinePackage line: the line to convert
- * Return: a linepackage with the converted line
+ *      LinePackage line: The Linepackage with the data to convert
+ * Return: a linepackage with the converted line (LinePackage)
  * Expects
- *      line to be a valid linepackage. TODO: improve this
+ *      Expects the LinePackage to be in the format of:
+ *              (numberDigits) (numberDigits) (numberDigits) ...
  * Notes:
  *      will always end line WITHOUT \n character
+ *      will write to the line in-place
  *
  ************************/
 LinePackage convertSingleLine(LinePackage line);
 
-/* TODO: Finish this function */
-/**********stringToBytes********
+/*********stringToBytes*********
  *
- * Converts data of digit bytes to character bytes
+ * Converts all of the LinePackages from plain to raw data, 
+ *      maintaining the order the LinePackages were given in
  * Inputs:
- *      LinePackage line: the line to convert
- * Return: a linepackage with the converted line
+ *      Seq_T cleanedLines: A sequence with the plain digit lines
+ *                          in the correct order
+ * Return: A sequence with all of the raw lines in order (Seq_T)
  * Expects
- *      line to be a valid linepackage. TODO: improve this
+ *      There are no NULL in cleanedLines
+ *      The lines don't have any "dirty" characters aka digits in the format:
+ *              (numberDigits) (numberDigits) (numberDigits) ...
  * Notes:
  *      will always end line WITHOUT \n character
  *
  ************************/
+Seq_T stringToBytes(Seq_T cleanedLines);
+
 Seq_T stringToBytes(Seq_T cleanedLines)
 {
         Seq_T rawLines = Seq_new(1);
