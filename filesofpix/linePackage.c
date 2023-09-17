@@ -76,7 +76,7 @@ void LinePackage_free(LinePackage byteListStruct)
 
 // TODO: fix function formatting
 /* TODO: finish LinePackage_byteList description */
-/**********LinePackage_new********
+/**********LinePackage_byteList********
  *
  * Creates a new linepackage struct
  * Inputs:
@@ -94,17 +94,42 @@ char *LinePackage_byteList(LinePackage byteListStruct)
         return byteListStruct -> byteList;
 }
 
+/* TODO: finish LinePackage_size description */
+/**********LinePackage_size********
+ *
+ * Outputs the size of the byte list in the given linepackage struct.
+ * Inputs:
+ *      LinePackage byteListStruct: the linepackage to check size of
+ * Return: The size_t of the given linepackage's byte list.
+ * Expects
+ *      byteListStruct to be a valid linepackage
+ * Notes:
+ *      TODO: finish notes
+ *
+ ************************/
 size_t LinePackage_size(LinePackage byteListStruct) 
 {
         return byteListStruct -> size;
 }
 
+/* TODO: finish LinePackage_set_size description */
+/**********LinePackage_set_size********
+ *
+ * Sets the capacity of given linepackage struct to new size.
+ * Inputs:
+ *      LinePackage byteListStruct: the linepackage to modify capacity of
+ *      size_t new_size: the new size to set the linepackage's capacity to
+ * Return: nothing
+ * Expects
+ *      byteListStruct to be a valid linepackage.
+ *      new_size to be larger than the current linepackage capacity
+ * Notes:
+ *      CRE if new_size < current capacity
+ *
+ ************************/
 void LinePackage_set_size(LinePackage byteListStruct, size_t new_size) 
 {
         assert(new_size < byteListStruct -> capacity);
-        // if (new_size > byteListStruct -> capacity) {
-        //         exit(1);        // TODO: Check what error code this should output
-        // }
 
         byteListStruct -> size = new_size;
 }
