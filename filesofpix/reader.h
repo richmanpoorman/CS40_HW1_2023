@@ -4,8 +4,7 @@
  *      hw1: filesofpix
  *
  *      Summary:
- *      
- *      TODO: write summary for reader.h
+ *      Reads in from given file and stores the information.
  *      
  */
 
