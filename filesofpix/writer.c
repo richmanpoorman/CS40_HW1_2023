@@ -16,6 +16,21 @@
 
 /* TODO: Write function contracts */
 /* POTENTIAL TODO: add parameter to writer that is what the maxVal is */
+/* TODO: Finish this function description */
+/**********writer********
+ *
+ * Writes data to given output file
+ * Inputs:
+ *      FILE *outputFile: pointer to output file
+ *      Seq_T rawlines: the raw P5 PGM lines to output
+ * Return: nothing
+ * Expects
+ *      *outputFile to be nonnull
+ *      rawLines to be uncorrupted P5 PGM lines
+ * Notes:
+ *      writer automatically generates and writes the P5 PGM header
+ *
+ ************************/
 void writer(FILE *outputFile, Seq_T rawLines) 
 {
         /* create header */
