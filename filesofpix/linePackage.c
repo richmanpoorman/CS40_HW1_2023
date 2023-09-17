@@ -22,11 +22,27 @@ typedef struct LinePackage
 } *LinePackage;
 
 // TODO: Explain what each function does
+
+/* TODO: move these descriptions to where the function contracts will be located */
+/* TODO: Finish LinePackage_new function description */
+
+/**********LinePackage_new********
+ *
+ * Creates a new linepackage struct
+ * Inputs:
+ *      char *bytes: list of bytes to store      TODO: Improve this
+ *      size_t length: the size of the byte list to store
+ * Return: A linepackage struct furnished with the given data
+ * Expects
+ *      *bytes to not be NULL. length to correctly indicate the size of *bytes
+ * Notes:
+ *      TODO: finish notes
+ *
+ ************************/
 LinePackage LinePackage_new(char *bytes, size_t length) 
 {
         LinePackage linepackage_p = ALLOC(sizeof(*linepackage_p));
-        // printf("ALLOC'd new LinePackage at %p\n", (void*) linepackage_p);
-
+        /* POTENTIAL TODO: make assert that checks that memory ALLOC'd okay */
 
         linepackage_p -> byteList = bytes;
         linepackage_p -> size = length;
@@ -35,6 +51,20 @@ LinePackage LinePackage_new(char *bytes, size_t length)
         return linepackage_p;
 }
 
+/* TODO: finish LinePackage_free function description */
+/**********LinePackage_free********
+ *
+ *      FREE's memory LinePackage allocates.
+ * Inputs:
+ *      LinePackage byteListStruct: TODO: Finish this
+ * Return: nothing
+ * Expects
+ *      TODO: Finish expects
+ * Notes:
+ *      TODO: finish notes
+ *      Should only be called when the linepackage is no longer needed.
+ *
+ ************************/
 void LinePackage_free(LinePackage byteListStruct) 
 {
         // TODO: Put memory all on heap and make sure to free
@@ -45,7 +75,20 @@ void LinePackage_free(LinePackage byteListStruct)
 }
 
 // TODO: fix function formatting
-
+/* TODO: finish LinePackage_byteList description */
+/**********LinePackage_new********
+ *
+ * Creates a new linepackage struct
+ * Inputs:
+ *      char *bytes: list of bytes to store      TODO: Improve this
+ *      size_t length: the size of the byte list to store
+ * Return: A linepackage struct furnished with the given data
+ * Expects
+ *      *bytes to not be NULL. length to correctly indicate the size of *bytes
+ * Notes:
+ *      TODO: finish notes
+ *
+ ************************/
 char *LinePackage_byteList(LinePackage byteListStruct) 
 {
         return byteListStruct -> byteList;
