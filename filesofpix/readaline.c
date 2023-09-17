@@ -83,7 +83,7 @@ size_t readaline(FILE *inputfd, char **datapp)
 
                 buffer[writerHead] = (char)currentByte;
 
-                currentByte = fgetc(inputfd); // Go to the next character
+                currentByte = fgetc(inputfd); /* Go to the next character */
                 writerHead++;
                 
                 /* If error when reading, cre */

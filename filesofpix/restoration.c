@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-// #include "readaline.h"
+// #include "readaline.h"       /* TODO: Check if we need this */
 #include "LinePackage.h"     
 #include "reader.h"             // TODO: check if we need these .h files
 #include "cleaner.h"
@@ -20,11 +20,11 @@
 #include <seq.h>
 #include <assert.h>
 
-// TODO: fix function formatting
-
 // TODO: make sure all chars are unsigned chars—This might not be necessary
 
 /* TODO: replace all exit(1) with asserts */
+
+/* TODO: rename linePackage.c and .h to LinePackage.c */
 
 int main(int argc, char *argv[]) 
 {
@@ -61,8 +61,5 @@ int main(int argc, char *argv[])
         if (inputFile != NULL) { /* This closes the file when we reach the 
                                     end */
                 fclose(inputFile);
-        }
-        else {
-                printf("No File\n");    /* TODO: Check if this is needed */
         }
 }

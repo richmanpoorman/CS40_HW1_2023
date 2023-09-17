@@ -20,17 +20,17 @@
 #include "readaline.h"
 #include <assert.h>
 
-/* TODO: Check if reader needs a function contract to fulfil style guide */
 /**********reader********
  *
  * Reads the contents of a given file
  * Inputs:
- *              FILE *inputFile: pointer to file to read from
+ *      FILE *inputFile: pointer to file to read from
  * Return: Hanson Sequence of LinePackage structs that represents a line
  * Expects
- *      inputFile to be opened
+ *      inputFile to have been opened
  * Notes:
- *      TODO: Finish summary
+ *      CRE if inputFile NULL
+ * 
  ************************/
 Seq_T reader(FILE *inputFile)
 {
@@ -43,7 +43,6 @@ Seq_T reader(FILE *inputFile)
 
         Seq_T lines = Seq_new(1);
 
-        // TODO: Check if we can use do while loops
         while (size != 0) {
                 LinePackage tempLine = LinePackage_new(datapp, size);
 
