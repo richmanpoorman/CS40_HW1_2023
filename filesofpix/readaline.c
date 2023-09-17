@@ -16,7 +16,7 @@
 #include <mem.h>
 #include <assert.h>
 
-#include "readaline.h"  /* TODO: This include is necessary for spec–DO NOT DELETE */
+#include "readaline.h"
 
 /**********resizeReadLine********
  *
@@ -47,22 +47,22 @@ void resizeReadLine(char **data, size_t *capacity);
  *      Expects the string allocated by readaline to be freed elsewhere
  * Notes:
  *      CRE if *inputfd or **datapp is NULL.
- *      CRE if *inputfd is eof. TODO: Check if this is meant to happen
  *      CRE if buffer memory could not be ALLOC'd
  *      CRE if readaline encounters error reading in from input file
  *
  ************************/
 size_t readaline(FILE *inputfd, char **datapp);
 
-/* TODO: readaline leaves the file seek pointer at the first (i.e., unread) character of the following line (if any) or at EOF */
-
 size_t readaline(FILE *inputfd, char **datapp) 
 {
         /* If either inputfd is null or datapp is null, cre */
         assert(inputfd != NULL && datapp != NULL);
 
-        /* If it starts with an empty file, cre */
-        assert(feof(inputfd) == 0);
+        /* If it starts with an empty file, returns 0 and NULL */
+        if (feof(inputfd) != 0) {
+                *datapp = NULL;
+                return 0;
+        }
 
         size_t  capacity = 512;
         char   *buffer   = ALLOC(capacity * sizeof(*buffer));
@@ -85,7 +85,7 @@ size_t readaline(FILE *inputfd, char **datapp)
 
                 buffer[writerHead] = (char)currentByte;
 
-                currentByte = fgetc(inputfd); /* Go to the next character */
+                currentByte = fgetc(inputfd); // Go to the next character
                 writerHead++;
                 
                 /* If error when reading, cre */
