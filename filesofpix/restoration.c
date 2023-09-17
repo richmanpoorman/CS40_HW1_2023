@@ -30,11 +30,10 @@
 
 int main(int argc, char *argv[]) 
 {
-        FILE *inputFile  = NULL;
-        FILE *outputFile = stdout;
+        assert(argc <= 2);
 
-        /* Check that we have the required inputs—no more, no less */
-        assert(argc == 2);
+        FILE *inputFile  = stdin;
+        FILE *outputFile = stdout;
         
         /* open file */
         if (argc == 2) {         
@@ -64,4 +63,6 @@ int main(int argc, char *argv[])
                                     end */
                 fclose(inputFile);
         }
+
+        exit(EXIT_SUCCESS);
 }
