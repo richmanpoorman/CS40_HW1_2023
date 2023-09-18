@@ -4,7 +4,7 @@
  *      hw1: filesofpix
  *
  *      Summary:
- *      
+ *       
  *      LinePackage is a container that stores a list of bytes
  *      along with the accessible size
  *      

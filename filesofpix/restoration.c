@@ -5,9 +5,8 @@
  *
  *      Summary:
  *      
- *      The program takes in a corrupted P2 PGM, uncorrupts the data, and writes
- *      an uncorrupted P5 PGM to stdout
- *      TODO: Fix this summary potentially.
+ *      The program takes in a corrupted P2 PGM, uncorrupts the data, and 
+ *      writes an uncorrupted P5 PGM to stdout,
  */
 
 #include <stdio.h>
@@ -19,8 +18,6 @@
 #include "writer.h"
 #include <seq.h>
 #include <assert.h>
-
-/* TODO: rename linePackage.c and .h to LinePackage.c */
 
 int main(int argc, char *argv[]) 
 {
