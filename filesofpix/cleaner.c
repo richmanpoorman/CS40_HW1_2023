@@ -16,9 +16,7 @@
 #include <stdbool.h>
 #include <assert.h>
 
-#include <stdio.h>  //TODO:: REMOVE THIS AFTER TESTING
 
-/* TODO: Finish this function description */
 /**********cleanSingleLine********
  *
  * Remove corrupted characters from a single line
@@ -36,23 +34,6 @@
  ************************/
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
 
-/* TODO: Finish this function description */
-/**********freeTablePackages********
- *
- * FREE's all allocated memory of table TODO: Improve this
- * Inputs:
- *      const void *key: TODO: Explain key
- *      void **value: TODO: explain this variable
- *      void *cl: TODO: explain this variable
- * Return: nothing
- * Expects
- *      *key, **value, *cl to be nonnull. TODO: check that this is true
- * Notes:
- *      TODO: Finish notes
- *
- ************************/
-void freeTablePackages(const void *key, void **value, void *cl);
-
 Seq_T cleaner(Seq_T corruptedLines);
 
 // TODO: Write function descriptions
@@ -64,7 +45,7 @@ Seq_T cleaner(Seq_T corruptedLines)
 
         /* make new Seq_T to store cleaned lines */
         Seq_T cleanedLines = Seq_new(defaultSize);
-
+        
         /* Stores what the injected line of real rows is */
         LinePackage original = NULL;
 
@@ -74,6 +55,7 @@ Seq_T cleaner(Seq_T corruptedLines)
          *  same line injection is found the second time 
          */
         Table_T injectionTable = Table_new(defaultSize, NULL, NULL);
+        Seq_T allValues        = Seq_new(defaultSize);
         
 
         /*  clean every line sequentially 
@@ -119,6 +101,7 @@ Seq_T cleaner(Seq_T corruptedLines)
                 }
                 else {
                         Table_put(injectionTable, injectedAtom, line);
+                        Seq_addhi(allValues, line);
                 }
 
                 /* Update seenInTable with the key */
@@ -126,7 +109,14 @@ Seq_T cleaner(Seq_T corruptedLines)
         }
 
         /* Frees up the table */
-        Table_map(injectionTable, freeTablePackages, original);
+        while (Seq_length(allValues) > 0) {
+                LinePackage val = Seq_remlo(allValues);
+                if (val != original) {
+                        LinePackage_free(val);
+                }
+                
+        }
+        Seq_free(&allValues);
         Table_free(&injectionTable);
         
         return cleanedLines;
@@ -175,19 +165,4 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected)
         *injected = LinePackage_new(injectedCharacters, injectedWriteHead);
 
         return line;
-}
-
-void freeTablePackages(const void *key, void **value, void *cl) {
-
-        /*   Free the LinePackage in the table if it is
-         *   an injected string; only one string in the 
-         *   table is not the injected, which is passed 
-         *   through cl
-         */
-        LinePackage original = cl;
-        LinePackage inTable  = *value;
-        if (inTable != original) {
-                FREE(inTable);
-        }
-        (void) key; /* Don't need the key value */
 }
