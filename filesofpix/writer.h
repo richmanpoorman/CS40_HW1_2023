@@ -4,8 +4,7 @@
  *      hw1: filesofpix
  *
  *      Summary:
- *      
- *      TODO: write summary for writer.h
+ *      Writes byte data to given output file.
  *      
  */
 

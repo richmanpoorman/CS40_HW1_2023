@@ -6,8 +6,6 @@
  *      Summary:
  *      Writes byte data to given output file.
  *      
- *      TODO: write summary for writer.c
- *      
  */
 
 #include <stdio.h>
@@ -64,5 +62,4 @@ void writer(FILE *outputFile, Seq_T rawLines)
         }
 
         /* TODO: Check if we put \n chars at the end of each output */
-        /* TODO: Check if we need to fix atom memory leaks */
 }
