@@ -109,8 +109,6 @@ size_t readaline(FILE *inputfd, char **datapp)
         return writerHead;
 }
 
-/* POTENTIAL TODO: readaline leaves the file seek pointer at the first (i.e., unread) character of the following line (if any) or at EOF */
-
 void resizeReadLine(char **data, size_t *capacity) {
         size_t  size     = *capacity;
         char   *currData = *data;

@@ -36,11 +36,8 @@ LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
 
 Seq_T cleaner(Seq_T corruptedLines);
 
-// TODO: Write function descriptions
 Seq_T cleaner(Seq_T corruptedLines)
 {
-        
-
         size_t defaultSize = Seq_length(corruptedLines) / 2;
 
         /* make new Seq_T to store cleaned lines */

@@ -12,7 +12,6 @@
 #include <seq.h>
 #include "LinePackage.h"
 
-/* TODO: Write function contracts */
 /* POTENTIAL TODO: add parameter to writer that is what the maxVal is */
 /* TODO: Finish this function description */
 /**********writer********
@@ -33,10 +32,10 @@ void writer(FILE *outputFile, Seq_T rawLines)
 {
         /* create header */
         /* Second newline character to skip comment line */
-        fprintf(outputFile, "P5\n\n");  /* TODO: Check if we print anything in the comment line */
+        fprintf(outputFile, "P5\n\n"); 
 
         /* determine width and height */
-        size_t width, height;   /* TODO: Check if this is proper style */
+        size_t width, height;
         width = LinePackage_size(Seq_get(rawLines, 0));    /* -1 for \n */
         height = Seq_length(rawLines);
 
@@ -53,7 +52,6 @@ void writer(FILE *outputFile, Seq_T rawLines)
                 char *byteList = LinePackage_byteList(line);
 
                 /* print each char in byteList */
-                /* TODO: check if there is a different var than i for size_t */
                 for (size_t i = 0; i < size; i++) {
                         fprintf(outputFile, "%c", byteList[i]);
                 }
