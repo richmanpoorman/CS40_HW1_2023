@@ -72,9 +72,6 @@ clean:
 %.o:%.c $(INCLUDES) 
 	$(CC) $(CFLAGS) -c $<
 
-# TODO: format makefile. Make sure no lines are over 80 characters. Check if 
-# this is needed.
-
 #
 # Individual executables
 #
@@ -93,7 +90,9 @@ restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o \
 # $^ inserts the relocatable object file names into the command
 #
 
+# 
 # executable that makes the test.c file and runs it TODO: Fix description
+# 
 test: test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o \
       writer.o
 	$(CC) $(LDFLAGS) -o test test.o readaline.o LinePackage.o reader.o \
