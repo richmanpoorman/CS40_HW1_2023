@@ -5,22 +5,20 @@
  *
  *      Summary:
  *      
- *      The program takes in a corrupted P2 PGM, uncorrupts, and writes an uncorrupted P5 PGM to a given file
+ *      The program takes in a corrupted P2 PGM, uncorrupts the data, and writes
+ *      an uncorrupted P5 PGM to stdout
  *      TODO: Fix this summary potentially.
  */
 
 #include <stdio.h>
 
-// #include "readaline.h"       /* TODO: Check if we need this */
 #include "LinePackage.h"     
-#include "reader.h"             // TODO: check if we need these .h files
+#include "reader.h"
 #include "cleaner.h"
 #include "stringToBytes.h"
 #include "writer.h"
 #include <seq.h>
 #include <assert.h>
-
-// TODO: make sure all chars are unsigned chars—This might not be necessary
 
 /* TODO: replace all exit(1) with asserts */
 

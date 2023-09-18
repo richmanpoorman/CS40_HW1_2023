@@ -1,0 +1,1 @@
+/comp/40/bin/images/p2/cartoon-p2.pgm

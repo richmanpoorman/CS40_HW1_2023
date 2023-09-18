@@ -4,8 +4,7 @@
  *      hw1: filesofpix
  *
  *      Summary:
- *      
- *      TODO: write summary for cleaner.h
+ *      Takes in corrupted data and uncorrupts it.
  *      
  */
 
