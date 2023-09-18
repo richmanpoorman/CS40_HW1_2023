@@ -72,7 +72,8 @@ clean:
 %.o:%.c $(INCLUDES) 
 	$(CC) $(CFLAGS) -c $<
 
-# TODO: format makefile. Make sure no lines are over 80 characters. Check if this is needed.
+# TODO: format makefile. Make sure no lines are over 80 characters. Check if 
+# this is needed.
 
 #
 # Individual executables
@@ -81,8 +82,10 @@ clean:
 #    Those .o files are linked together to build the corresponding
 #    executable.
 #
-restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o writer.o
-	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o writer.o $(LDLIBS)
+restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o 
+	     stringToBytes.o writer.o
+	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o LinePackage.o
+	                 reader.o cleaner.o stringToBytes.o writer.o $(LDLIBS)
 
 #
 # Other Shortcuts worth nothing
@@ -91,5 +94,7 @@ restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o stringTo
 #
 
 # executable that makes the test.c file and runs it TODO: Fix description
-test: test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o writer.o
-	$(CC) $(LDFLAGS) -o test test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o writer.o $(LDLIBS)
+test: test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o 
+      writer.o
+	$(CC) $(LDFLAGS) -o test test.o readaline.o LinePackage.o reader.o 
+	                 cleaner.o stringToBytes.o writer.o $(LDLIBS)
