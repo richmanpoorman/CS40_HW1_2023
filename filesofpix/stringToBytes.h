@@ -5,7 +5,7 @@
  *
  *      Summary:
  *      
- *      TODO: write file description for stringToBytes.h
+ *      Converts plain text numbers to raw bytes
  */
 
 #include <seq.h>

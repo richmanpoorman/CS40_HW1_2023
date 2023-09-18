@@ -10,16 +10,16 @@
 
 #include <stdio.h>
 #include <seq.h>
+#include <stddef.h>
 #include "LinePackage.h"
 
-/* POTENTIAL TODO: add parameter to writer that is what the maxVal is */
-/* TODO: Finish this function description */
+
 /**********writer********
  *
  * Writes data to given output file
  * Inputs:
  *      FILE *outputFile: pointer to output file
- *      Seq_T rawlines: the raw P5 PGM lines to output
+ *      Seq_T rawlines: the raw P5 PGM lines to output in the correct format
  * Return: nothing
  * Expects
  *      *outputFile to be nonnull
@@ -28,6 +28,8 @@
  *      writer automatically generates and writes the P5 PGM header
  *
  ************************/
+void writer(FILE *outputFile, Seq_T rawLines);
+
 void writer(FILE *outputFile, Seq_T rawLines) 
 {
         /* create header */
@@ -59,5 +61,4 @@ void writer(FILE *outputFile, Seq_T rawLines)
                 LinePackage_free(line);
         }
 
-        /* TODO: Check if we put \n chars at the end of each output */
 }

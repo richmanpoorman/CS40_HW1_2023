@@ -1,6 +1,7 @@
 // test file
 
 #include <stdio.h>
+#include <stddef.h>
 
 // #include "readaline.h"
 #include "LinePackage.h"     

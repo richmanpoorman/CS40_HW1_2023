@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <mem.h>
 #include <assert.h>
+#include <stddef.h>
 
 typedef struct LinePackage 
 {

@@ -9,12 +9,13 @@
  */
 
 #include <seq.h>
-#include <stdio.h>     // TODO: Check if include reader.h file
+#include <stdio.h>
 #include <stdlib.h>
 #include <mem.h>
 #include "LinePackage.h"
 #include "readaline.h"
 #include <assert.h>
+#include <stddef.h>
 
 /**********reader********
  *

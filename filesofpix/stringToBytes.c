@@ -12,6 +12,7 @@
 
 #include <seq.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 #include "LinePackage.h"
 
@@ -96,8 +97,8 @@ LinePackage convertSingleLine(LinePackage line)
                 byteList[writeHead] = (char) value;
                 writeHead++;
         }
-        /* writeHead always points to one after the last written place, which is
-           the size */
+        /* writeHead always points to one after the last written place, which 
+           is the size */
         LinePackage_set_size(line, writeHead);
 
         return line;
