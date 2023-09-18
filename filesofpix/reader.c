@@ -6,11 +6,7 @@
  *      Summary:
  *      Reads in from given file and stores the information.
  *      
- *      TODO: write summary for reader.c
- *      
  */
-
-// TODO: write function descriptions
 
 #include <seq.h>
 #include <stdio.h>     // TODO: Check if include reader.h file

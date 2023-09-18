@@ -74,17 +74,19 @@ LinePackage convertSingleLine(LinePackage line)
         for (size_t readHead = 0; readHead < size; readHead++) {
                 char byte = byteList[readHead];
                 
-                if (byte >= '0' && byte <= '9') { // If the value if a digit, then accumulate
+                /* If the value if a digit, then accumulate */
+                if (byte >= '0' && byte <= '9') {
                         hasPushed = false;
                         value *= 10;
                         value += byte - '0';   
                 }
-                else { // Otherwise, put it into the string
+                else { /* Otherwise, put it into the string */
                         hasPushed = true;
                         byteList[writeHead] = (char) value;
                         writeHead++;
                         value = 0;
-                        if (byte == '\n') { // If it is an endline, put the endline on as well
+                        if (byte == '\n') { /* If it is an endline, put the 
+                                               endline on as well */
                                 byteList[writeHead] = '\n';
                                 writeHead++;
                         }
@@ -94,7 +96,8 @@ LinePackage convertSingleLine(LinePackage line)
                 byteList[writeHead] = (char) value;
                 writeHead++;
         }
-        // writeHead always points to one after the last written place, which is the size
+        /* writeHead always points to one after the last written place, which is
+           the size */
         LinePackage_set_size(line, writeHead);
 
         return line;
