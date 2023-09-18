@@ -34,10 +34,12 @@ Seq_T reader(FILE *inputFile)
 {
         /* Check that inputFile is good */
         assert(inputFile != NULL);
+        assert(feof(inputFile) == 0);
 
         char *datapp;
 
         size_t size = readaline(inputFile, &datapp);
+        assert(size != 0);
 
         Seq_T lines = Seq_new(1);
 
