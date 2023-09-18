@@ -4,10 +4,8 @@
  *      hw1: filesofpix
  *
  *      Summary:
- *      Converts string data into single byte data.
- *      
  *      Converts the plain text cleaned digits and turns them
- *              into raw format strings
+ *      into raw format strings
  */
 
 #include <seq.h>

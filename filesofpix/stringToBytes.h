@@ -5,7 +5,8 @@
  *
  *      Summary:
  *      
- *      Converts plain text numbers to raw bytes
+ *      Converts the plain text cleaned digits and turns them
+ *      into raw format strings
  */
 
 #include <seq.h>

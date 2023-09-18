@@ -6,7 +6,7 @@
  *      Summary:
  *      
  *      Reads a single line which ends at either a 
- *              \n character or end of file flag
+ *      \n character or end of file flag
  *      
  */
 
