@@ -12,6 +12,7 @@
 #include <seq.h>
 #include <stddef.h>
 #include "LinePackage.h"
+#include "writer.h"
 
 
 /**********writer********

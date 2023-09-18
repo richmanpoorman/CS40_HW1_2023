@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <mem.h>
 #include "LinePackage.h"
+#include "reader.h"
 #include "readaline.h"
 #include <assert.h>
 #include <stddef.h>

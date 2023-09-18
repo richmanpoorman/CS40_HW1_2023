@@ -14,6 +14,7 @@
 #include <mem.h>
 #include <assert.h>
 #include <stddef.h>
+#include "LinePackage.h"
 
 typedef struct LinePackage 
 {

@@ -13,6 +13,7 @@
 #include <stddef.h>
 
 #include "LinePackage.h"
+#include "stringToBytes.h"
 
 /**********convertSingleLine********
  *

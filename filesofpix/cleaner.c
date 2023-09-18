@@ -14,6 +14,7 @@
 #include <table.h>
 #include <atom.h>
 #include "LinePackage.h"
+#include "cleaner.h"
 #include <stdbool.h>
 #include <assert.h>
 
