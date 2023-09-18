@@ -23,7 +23,7 @@
  *
  * Resizes the data buffer size
  * Inputs:
- *	char **data: pointer to buffer to resize
+ *      char **data: pointer to buffer to resize
  *      size_t *capacity: pointer to the buffer current capacity
  * Return: nothing (void)
  * Expects
