@@ -8,6 +8,7 @@
  *      
  */
 
+#include <stddef.h>
 #include <seq.h>
 #include <mem.h>
 #include <table.h>
@@ -22,25 +23,37 @@
  * Remove corrupted characters from a single line
  * Inputs:
  *      LinePackage line: the line to clean
- *      LinePackage *injected: pointer to linepackage to store corrupted data to
+ *      LinePackage *injected: pointer to linepackage to store corrupted data
  * Return: A linepackage without any corrupted characters
  * Expects
- *      line to be a valid linepackage. TODO: improve this
+ *      line to be a valid linepackage
  *      *injected to be nonnull
  * Notes:
  *      Will store all the digits characters in line, and all the
  *      corrupted characters in *injected
+ *      Will CRE if given bad input
  *
  ************************/
 LinePackage cleanSingleLine(LinePackage line, LinePackage *injected);
 
+/**********cleaner********
+ *
+ * Remove corrupted characters from each line of the given sequence
+ * Inputs:
+ *      Seq_T corruptedLines: The sequence storing all of the corrupted lines
+ *                            in the order that they should appear
+ * Return: A sequence with cleaned plain lines in the order that they
+ *         were given (Seq_T)
+ * Expects
+ *      The sequence to not be NULL (will URE if it is)
+ * Notes:
+ *      Will return a new Seq_T, so the old one needs to be deallocated
+ *
+ ************************/
 Seq_T cleaner(Seq_T corruptedLines);
 
-// TODO: Write function descriptions
 Seq_T cleaner(Seq_T corruptedLines)
 {
-        
-
         size_t defaultSize = Seq_length(corruptedLines) / 2;
 
         /* make new Seq_T to store cleaned lines */
