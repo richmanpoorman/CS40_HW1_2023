@@ -20,11 +20,7 @@
 #include <seq.h>
 #include <assert.h>
 
-/* TODO: replace all exit(1) with asserts */
-
 /* TODO: rename linePackage.c and .h to LinePackage.c */
-
-/* TODO: check that makefile is all good and proper */
 
 int main(int argc, char *argv[]) 
 {

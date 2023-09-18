@@ -68,10 +68,6 @@ size_t readaline(FILE *inputfd, char **datapp)
         char   *buffer   = ALLOC(capacity * sizeof(*buffer));
         
         /* If buffer can't alloc */
-        if (buffer == NULL) {
-                fprintf(stderr, "readaline: input line too long\n");    /* TODO: Check that this works */
-                /* TODO: The spec says that if the line is too long, we should exit(4) but it also says that if memory allocation fails we should CRE. Which do we do in this situation? */
-        }
         assert(buffer != NULL);
 
         size_t writerHead = 0;
@@ -112,8 +108,6 @@ size_t readaline(FILE *inputfd, char **datapp)
         /* The writerHead is the same as the size of the string */
         return writerHead;
 }
-
-/* POTENTIAL TODO: readaline leaves the file seek pointer at the first (i.e., unread) character of the following line (if any) or at EOF */
 
 void resizeReadLine(char **data, size_t *capacity) {
         size_t  size     = *capacity;

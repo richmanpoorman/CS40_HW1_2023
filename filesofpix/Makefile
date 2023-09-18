@@ -91,7 +91,7 @@ restoration: restoration.o readaline.o LinePackage.o reader.o cleaner.o \
 #
 
 # 
-# executable that makes the test.c file and runs it TODO: Fix description
+# executable that runs the test files
 # 
 test: test.o readaline.o LinePackage.o reader.o cleaner.o stringToBytes.o \
       writer.o
