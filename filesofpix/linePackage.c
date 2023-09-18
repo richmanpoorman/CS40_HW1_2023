@@ -138,7 +138,7 @@ size_t LinePackage_size(LinePackage byteListStruct)
 void LinePackage_set_size(LinePackage byteListStruct, size_t new_size) 
 {
         assert(byteListStruct != NULL);
-        assert(new_size < byteListStruct -> capacity);
+        assert(new_size <= byteListStruct -> capacity);
 
         byteListStruct -> size = new_size;
 }

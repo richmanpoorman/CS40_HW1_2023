@@ -111,10 +111,10 @@ void test(FILE *inputFile, FILE *outputFile)
 {
         // testStringToBytes(inputFile);
         // testCleaner(inputFile);
-        // testReader(inputFile);
+        testReader(inputFile);
         // testLinePackageNew();
         // testReadaline(inputFile);
-        testWriter(inputFile, outputFile);
+        // testWriter(inputFile, outputFile);
         (void) inputFile;
         (void) outputFile;
 }
