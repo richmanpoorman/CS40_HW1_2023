@@ -5,7 +5,8 @@
  *
  *      Summary:
  *      
- *      TODO: write summary for LinePackage.h
+ *      LinePackage is a container that stores a list of bytes
+ *      along with the accessible size
  *      
  */
 
